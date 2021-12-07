@@ -1,4 +1,4 @@
-package VISTA;
+package proyecto1;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -10,7 +10,7 @@ import javax.swing.JComboBox;
 
 public class teatro extends JPanel {
 	private JPanel panel_teatro;
-	private JPanel panel;
+	private JPanel panel_menu;
 	private JPanel panel_datos;
 	
 	/**
@@ -29,9 +29,9 @@ public class teatro extends JPanel {
 		btn_menu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_teatro.setVisible(false);
-				panel= new JPanel();
-				panel.setBounds(10, 11, 829, 493);
-				add(panel);
+				panel_menu= new panel_menu();
+				panel_menu.setBounds(10, 11, 829, 493);
+				add(panel_menu);
 			}
 		});
 		btn_menu.setBounds(254, 347, 89, 23);
@@ -49,7 +49,7 @@ public class teatro extends JPanel {
 		btn_comprar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_teatro.setVisible(false);
-				panel_datos= new JPanel();
+				panel_datos= new compra();
 				panel_datos.setBounds(10, 11, 439, 468);
 				add(panel_datos);
 			}

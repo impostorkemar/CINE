@@ -1,4 +1,4 @@
-package VISTA;
+package proyecto1;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -38,7 +38,7 @@ public class principal extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		menu menu_ = new menu();
+		panel_menu menu_ = new panel_menu();
 		contentPane.add(menu_, BorderLayout.CENTER);
 	}
 

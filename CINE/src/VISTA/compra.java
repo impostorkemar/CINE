@@ -1,8 +1,11 @@
-package VISTA;
+package proyecto1;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import practica04.panel_menu;
+
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -94,15 +97,15 @@ public class compra extends JPanel {
 		panel_datos.add(lblEvento);
 		
 		JLabel lblSubtotal = new JLabel("SUBTOTAL");
-		lblSubtotal.setBounds(220, 297, 79, 14);
+		lblSubtotal.setBounds(156, 297, 79, 14);
 		panel_datos.add(lblSubtotal);
 		
 		JLabel lblNios_1_1 = new JLabel("IVA");
-		lblNios_1_1.setBounds(220, 338, 79, 14);
+		lblNios_1_1.setBounds(156, 338, 79, 14);
 		panel_datos.add(lblNios_1_1);
 		
 		JLabel lblNios_1_2 = new JLabel("TOTAL");
-		lblNios_1_2.setBounds(220, 381, 79, 14);
+		lblNios_1_2.setBounds(156, 381, 79, 14);
 		panel_datos.add(lblNios_1_2);
 		
 		txt_subtotal = new JTextField();
@@ -121,19 +124,19 @@ public class compra extends JPanel {
 		panel_datos.add(txt_total);
 		
 		JButton btn_aceptar = new JButton("ACEPTAR");
-		btn_aceptar.setBounds(312, 440, 89, 23);
+		btn_aceptar.setBounds(21, 365, 89, 23);
 		panel_datos.add(btn_aceptar);
 		
 		JButton btn_cancelar = new JButton("CANCELAR");
 		btn_cancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_datos.setVisible(false);
-				panel_cine= new JPanel();
+				panel_cine= new cine();
 				panel_cine.setBounds(10, 11, 439, 468);
 				add(panel_cine);
 			}
 		});
-		btn_cancelar.setBounds(198, 440, 89, 23);
+		btn_cancelar.setBounds(21, 316, 89, 23);
 		panel_datos.add(btn_cancelar);
 
 	}
