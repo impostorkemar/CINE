@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 
 public class panel_compra extends JPanel {
 	private JPanel panel_cine;
+	private JPanel panel_asientos;
 	public JTextField txt_cedula;
 	public JTextField txt_nombre;
 	public JTextField txt_telefono;
@@ -139,7 +140,11 @@ public class panel_compra extends JPanel {
 				if(ln_pc.comprobarCensura()) {
 					ln_pc.crearPersona();
 					ln_pc.calcularCosto();
-					ln_pc.print("Datos registrados",2);					
+					ln_pc.print("Datos registrados",2);	
+					panel_datos.setVisible(false);
+					panel_asientos=new panel_asientos();
+					panel_asientos.setBounds(10, 22, 700, 538);
+					add(panel_asientos);
 				}else 					
 					limpiar();			}
 		});
