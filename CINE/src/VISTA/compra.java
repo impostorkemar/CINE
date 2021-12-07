@@ -1,10 +1,10 @@
-package proyecto1;
+package VISTA;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import practica04.panel_menu;
+import VISTA.panel_menu;
 
 import javax.swing.JTextArea;
 import javax.swing.JButton;

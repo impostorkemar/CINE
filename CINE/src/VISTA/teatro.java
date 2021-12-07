@@ -1,4 +1,4 @@
-package proyecto1;
+package VISTA;
 
 import javax.swing.JPanel;
 import javax.swing.JButton;

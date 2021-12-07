@@ -1,8 +1,6 @@
-package proyecto1;
+package VISTA;
 
 import javax.swing.JPanel;
-
-import practica04.panel_archivo;
 
 import javax.swing.JButton;
 import java.awt.Font;

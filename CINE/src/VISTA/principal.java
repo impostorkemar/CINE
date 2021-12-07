@@ -1,4 +1,4 @@
-package proyecto1;
+package VISTA;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;

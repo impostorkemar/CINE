@@ -1,4 +1,4 @@
-package proyecto1;
+package VISTA;
 
 public class ejecutable {
 
