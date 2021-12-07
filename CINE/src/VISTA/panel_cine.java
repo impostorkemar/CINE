@@ -6,18 +6,25 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
+
+import CONTROLADORES.logica_negocio_panelCine;
+import CONTROLADORES.logica_negocio;
+import MODELO.pelicula;
+
 import javax.swing.JComboBox;
 
-public class cine extends JPanel {
+public class panel_cine extends JPanel {
 	private JPanel panel_cine;
 	private JPanel panel_menu;
 	private JButton btn_menu_1;
 	private JPanel panel_datos;
+	public JComboBox comboBox;
 
+	private logica_negocio_panelCine c_pc;
 	/**
 	 * Create the panel.
 	 */
-	public cine() {
+	public panel_cine(pelicula[] peliculas) {
 		setLayout(null);
 		
 		panel_cine = new JPanel();
@@ -42,7 +49,7 @@ public class cine extends JPanel {
 		btn_menu_4.setBounds(258, 334, 89, 23);
 		panel_cine.add(btn_menu_4);
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		comboBox.setBounds(39, 23, 308, 22);
 		panel_cine.add(comboBox);
 		
@@ -50,7 +57,7 @@ public class cine extends JPanel {
 		btn_menu_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_cine.setVisible(false);
-				panel_datos= new compra();
+				panel_datos= new panel_compra(peliculas, comboBox.getSelectedItem().toString(),"cine");
 				panel_datos.setBounds(10, 11, 439, 468);
 				add(panel_datos);
 			}
@@ -58,5 +65,6 @@ public class cine extends JPanel {
 		btn_menu_1.setBounds(152, 379, 96, 23);
 		panel_cine.add(btn_menu_1);
 
+		c_pc= new logica_negocio_panelCine(this, peliculas);
 	}
 }

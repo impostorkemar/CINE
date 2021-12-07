@@ -7,19 +7,23 @@ import patron_generico_g2.atributos_gen;
 
 public class sala {
 	//ATRIBUTOS
+	private String nombre;
 	private String tipo;
 	private asiento [] asientosIMAX;
-	private asiento [] asientosNormales;
+	private asiento [][] asientosNormales;
 	private horario [] horarios;
 			
 	//CONSTRUCTOR
 	public sala() {
 		
 	}
-	public sala(asiento asiento, horario horario, String tipo) {		
-		this.tipo=tipo;
-		crearIMAX();
-		crearNormales();
+	public sala(String nombre_,asiento[][] asientosNormales_, asiento[] asientosIMAX_, horario[] horarios_, String tipo_) {
+		this.nombre=nombre_;
+		this.tipo=tipo_;
+		this.horarios=horarios_;
+		this.asientosIMAX= asientosIMAX_;
+		this.asientosNormales=asientosNormales_;		
+		
 	}
 	//GETTERS AND SETTERS
 	public String getTipo() {
@@ -35,10 +39,10 @@ public class sala {
 	public void setAsientosIMAX(asiento[] asientosIMAX) {
 		this.asientosIMAX = asientosIMAX;
 	}
-	public asiento[] getAsientosNormales() {
+	public asiento[][] getAsientosNormales() {
 		return asientosNormales;
 	}
-	public void setAsientosNormales(asiento[] asientosNormales) {
+	public void setAsientosNormales(asiento[][] asientosNormales) {
 		this.asientosNormales = asientosNormales;
 	}
 	public horario[] getHorarios() {
@@ -49,18 +53,24 @@ public class sala {
 	}
 	//METODOS
 	public void crearIMAX() {
-		asientosIMAX[10]= new asiento();
+		asientosIMAX= new asiento[10];
 	}
 	public void crearNormales() {
-		asientosNormales[60]= new asiento();
+		asientosNormales= new asiento[5][10];
 	}
 	public void crearhorarios() {
-		horarios[2]= new horario();
+		horarios= new horario[2];
+	}
+	public String ImprimirHorarios() {
+		String resultado="";
+		for(int i=0; i<2; i++) {
+			resultado+=horarios[i].toString()+"\n\t";
+		}
+		return resultado;
 	}
 	@Override
 	public String toString() {
-		return "sala [tipo=" + tipo + ", asientosIMAX=" + Arrays.toString(asientosIMAX) + ", asientosNormales="
-				+ Arrays.toString(asientosNormales) + ", horarios=" + Arrays.toString(horarios) + "]";
+		return "\n"+nombre+" tipo=" + tipo + "\n\t"+ ImprimirHorarios() ;
 	}
 		
 	

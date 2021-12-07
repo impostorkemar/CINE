@@ -6,17 +6,24 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
+
+import CONTROLADORES.logica_negocio_panelTeatro;
+import MODELO.pelicula;
+
 import javax.swing.JComboBox;
 
-public class teatro extends JPanel {
+public class panel_teatro extends JPanel {
 	private JPanel panel_teatro;
 	private JPanel panel_menu;
 	private JPanel panel_datos;
+	public JComboBox comboBox;
+	
+	private logica_negocio_panelTeatro t_pc;
 	
 	/**
 	 * Create the panel.
 	 */
-	public teatro() {
+	public panel_teatro(pelicula[] peliculas) {
 		setLayout(null);
 		
 		panel_teatro = new JPanel();
@@ -41,7 +48,7 @@ public class teatro extends JPanel {
 		btn_detalle3.setBounds(254, 305, 89, 23);
 		panel_teatro.add(btn_detalle3);
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		comboBox.setBounds(36, 31, 301, 22);
 		panel_teatro.add(comboBox);
 		
@@ -49,13 +56,15 @@ public class teatro extends JPanel {
 		btn_comprar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_teatro.setVisible(false);
-				panel_datos= new compra();
+				panel_datos= new panel_compra(peliculas,comboBox.getSelectedItem().toString(),"teatro");
 				panel_datos.setBounds(10, 11, 439, 468);
 				add(panel_datos);
 			}
 		});
 		btn_comprar.setBounds(162, 347, 89, 23);
 		panel_teatro.add(btn_comprar);
-
+		
+		t_pc= new logica_negocio_panelTeatro(this, peliculas);
+		
 	}
 }

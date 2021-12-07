@@ -25,8 +25,7 @@ public class pelicula implements configurable{
 	}
 	@Override
 	public String toString() {
-		return "pelicula [datos=" + datos + ", getDatos()=" + getDatos() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+		return "funcion ["+datos.getAtributoT1()+" , "+datos.getAtributoT2()+" ,"+datos.getAtributoS1()+" , "+datos.getAtributoT3();
 	}
 	
 	

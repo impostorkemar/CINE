@@ -8,14 +8,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.SwingConstants;
 
-public class Inicio extends JPanel {
+public class panel_inicio extends JPanel {
 	public JLabel lbl_segundos;
 	public JLabel lbl_minutos;
 
 	/**
 	 * Create the panel.
 	 */
-	public Inicio() {
+	public panel_inicio() {
 		setLayout(null);
 		
 		JPanel panel_inicio = new JPanel();

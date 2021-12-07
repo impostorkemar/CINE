@@ -2,6 +2,8 @@ package VISTA;
 
 import javax.swing.JPanel;
 
+import CONTROLADORES.logica_negocio;
+
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Color;
@@ -13,8 +15,9 @@ public class panel_menu extends JPanel {
 	private JPanel panel_menu;
 	private JButton btn_teatro;
 	private JPanel panel_teatro;
-	private JPanel panel_cine;
+	private panel_cine panel_cine;
 
+	private logica_negocio ln;
 	/**
 	 * Create the panel.
 	 */
@@ -31,9 +34,10 @@ public class panel_menu extends JPanel {
 		btn_cine.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_menu.setVisible(false);
-				panel_cine= new cine();
+				panel_cine= new panel_cine(ln.getPeliculas());
 				panel_cine.setBounds(20, -30, 800, 500);
-				add(panel_cine);
+				add(panel_cine);				
+				
 			}
 		});
 		btn_cine.setFont(new Font("Times New Roman", Font.PLAIN, 22));
@@ -44,7 +48,7 @@ public class panel_menu extends JPanel {
 		btn_teatro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_menu.setVisible(false);
-				panel_teatro= new teatro();
+				panel_teatro= new panel_teatro(ln.getPeliculas());
 				panel_teatro.setBounds(10, 11, 355, 460);
 				add(panel_teatro);
 			}
@@ -53,5 +57,6 @@ public class panel_menu extends JPanel {
 		btn_teatro.setBounds(51, 220, 327, 79);
 		panel_menu.add(btn_teatro);
 
+		ln= new logica_negocio(this);
 	}
 }

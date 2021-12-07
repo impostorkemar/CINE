@@ -14,6 +14,11 @@ public class horario {
 		pelicula=new pelicula(nombreP,generoP,estado_CensuraP,sinapsisP);
 		datos= new atributos_gen<String,pelicula>(nombre,pelicula);			
 	}
+	public horario(String nombre,pelicula pelicula_) {	
+		pelicula=new pelicula(pelicula_.getDatos().getAtributoT1(),pelicula_.getDatos().getAtributoT2(),
+				pelicula_.getDatos().getAtributoS1(),pelicula_.getDatos().getAtributoT3());
+		datos= new atributos_gen<String,pelicula>(nombre,pelicula);			
+	}
 	//GETTERS AND SETTERS
 	public atributos_gen<String, pelicula> getDatos() {
 		return datos;
@@ -29,7 +34,7 @@ public class horario {
 	}
 	@Override
 	public String toString() {
-		return "horario [datos=" + datos + ", pelicula=" + pelicula + "]";
+		return datos.getAtributoT1()+" ["+datos.getAtributoS1().toString()+ "]";
 	}
 			
 			

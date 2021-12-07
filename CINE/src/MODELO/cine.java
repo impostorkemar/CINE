@@ -14,12 +14,12 @@ public class cine {
 	public cine() {
 		
 	}
-	public cine(String nombre, String direccion) {
+	public cine(String nombre, String direccion,sala [] salasVisuales_,sala [] salasTeatro_) {
+		this.salasVisuales=salasVisuales_;
+		this.salasTeatro=salasTeatro_;
 		datos= new atributos_gen<String,Date>(nombre,new Date());
-		datos.setAtributoT2(direccion);
-		this.salasVisuales = salasVisuales;
-		this.salasTeatro = salasTeatro;
-		crearSalas();
+		datos.setAtributoT2(direccion);		
+		
 	}
 	//GETTERS AND SETTERS
 	public atributos_gen<String, ?> getDatos() {
@@ -42,13 +42,26 @@ public class cine {
 	}
 	//METODOS
 	public void crearSalas() {
-		salasVisuales[10]=new sala();
-		salasTeatro[10]= new sala();
+		salasVisuales=new sala[10];
+		salasTeatro= new sala[10];
+	}
+	public String imprimirSalasCine() {
+		String aux="";
+		for(int k=0;k<10;k++) {
+			aux+=salasVisuales[k].toString();
+		}
+		return aux;
+	}
+	public String imprimirSalasTeatro() {
+		String aux="";
+		for(int k=0;k<10;k++) {
+			aux+=salasTeatro[k].toString();
+		}
+		return aux;
 	}
 	@Override
 	public String toString() {
-		return "cine [datos=" + datos + ", salasVisuales=" + Arrays.toString(salasVisuales) + ", salasTeatro="
-				+ Arrays.toString(salasTeatro) + "]";
+		return "\nCINE ="+datos.getAtributoT1()+" \n SALAS DE CINE \n" + imprimirSalasCine()+" \n SALAS DE TEATRO \n"+imprimirSalasTeatro();
 	}
 	
 }
