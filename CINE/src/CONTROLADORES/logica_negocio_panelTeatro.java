@@ -23,5 +23,19 @@ public class logica_negocio_panelTeatro implements configurable {
 		}
 
 	}
+	public void cargarInformacionPanelDetalles() {
+		for(int j=0; j<10;j++) {			
+			if(pt.comboBox.getSelectedItem().toString().equals(peliculas[j].getDatos().getAtributoT1())) {
+				pt.txt_nombre.setText(peliculas[j].getDatos().getAtributoT1());
+				if(pt.txt_censura.getText().equals("1"))
+					pt.txt_censura.setText("NO");
+				else 
+					pt.txt_censura.setText("SI");				
+				pt.txt_genero.setText(peliculas[j].getDatos().getAtributoT2());
+				pt.txtA_sinapsis.setText(peliculas[j].getDatos().getAtributoT3());
+			}
+		}
+		
+	}
 	
 }

@@ -26,13 +26,14 @@ public class panel_menu extends JPanel {
 		
 		panel_menu = new JPanel();
 		panel_menu.setBackground(new Color(30, 144, 255));
-		panel_menu.setBounds(10, 11, 829, 493);
+		panel_menu.setBounds(26, 34, 426, 450);
 		add(panel_menu);
 		panel_menu.setLayout(null);
 		
 		btn_cine = new JButton("CINE");
 		btn_cine.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				setLayout(null);
 				panel_menu.setVisible(false);
 				panel_cine= new panel_cine(ln.getPeliculas());
 				panel_cine.setBounds(20, -30, 800, 500);
@@ -47,6 +48,7 @@ public class panel_menu extends JPanel {
 		btn_teatro = new JButton("TEATRO");
 		btn_teatro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				setLayout(null);
 				panel_menu.setVisible(false);
 				panel_teatro= new panel_teatro(ln.getPeliculas());
 				panel_teatro.setBounds(10, 11, 355, 460);
