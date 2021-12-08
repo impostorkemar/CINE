@@ -12,7 +12,7 @@ public class logica_negocio_panelCompra implements configurable {
 	private persona persona;
 	private panel_compra pc;
 	private pelicula[] peliculas;
-	private int numeroAdultos=0, numeroNiños=0, numero3Edad=0;
+	private int numeroAdultos=0, numeroNiños=0, numeroTerceraEdad=0;
 	private double iva=0.12, costoAsiento=0.0, precioBoletoCine=4.5,subtotal=0, total=0,precioBoletoTeatro=12.5;
 	private String nombre_Pelicula_Funcion, tipo;	
 	private DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(); 
@@ -32,23 +32,66 @@ public class logica_negocio_panelCompra implements configurable {
 	}
 	public void contarAsientos() {
 		int numeroASientos=0;
-		if(pc.txt_niños.getText().equals(""))
+		if(comprobarCensura()) {
+			print("caso1",1);
+			if(pc.txt_niños.getText().equals("")&&pc.txt_adultos.getText().equals("")&&pc.txt_TerceraEdad.getText().equals("")) {
+				numeroNiños=0;
+				numeroAdultos=0;
+				numeroTerceraEdad=0;
+			}else if(pc.txt_niños.getText().equals("")&&pc.txt_adultos.getText().equals("")){
+				numeroNiños=0;
+				numeroAdultos=0;
+				numeroTerceraEdad=Integer.valueOf(pc.txt_TerceraEdad.getText());
+			}else if(pc.txt_adultos.getText().equals("")&&pc.txt_TerceraEdad.getText().equals("")) {
+				numeroAdultos=0;
+				numeroTerceraEdad=0;
+				numeroNiños=Integer.valueOf(pc.txt_niños.getText());
+			}else if(pc.txt_niños.getText().equals("")&&pc.txt_TerceraEdad.getText().equals("")) {
+				numeroNiños=0;
+				numeroTerceraEdad=0;
+				numeroAdultos=Integer.valueOf(pc.txt_adultos.getText());
+			}else if(pc.txt_niños.getText().equals("")){
+				numeroNiños=0;
+				numeroAdultos=Integer.valueOf(pc.txt_adultos.getText());
+				numeroTerceraEdad=Integer.valueOf(pc.txt_TerceraEdad.getText());
+			}else if(pc.txt_adultos.getText().equals("")) {
+				numeroAdultos=0;
+				numeroNiños=Integer.valueOf(pc.txt_niños.getText());
+				numeroTerceraEdad=Integer.valueOf(pc.txt_TerceraEdad.getText());
+			}else if(pc.txt_TerceraEdad.getText().equals("")) {
+				numeroTerceraEdad=0;
+				numeroNiños=Integer.valueOf(pc.txt_niños.getText());
+				numeroAdultos=Integer.valueOf(pc.txt_adultos.getText());
+			}else {
+				numeroNiños=Integer.valueOf(pc.txt_niños.getText());
+				numeroAdultos=Integer.valueOf(pc.txt_adultos.getText());
+				numeroTerceraEdad=Integer.valueOf(pc.txt_TerceraEdad.getText());
+			}
+			numeroASientos= Integer.valueOf(numeroNiños+numeroTerceraEdad+numeroAdultos);
+		}else if(comprobarCensura()==false) {
+			print("caso2",1);
 			numeroNiños=0;
-		else
-			numeroNiños=Integer.valueOf(pc.txt_niños.getText());
-		if(pc.txt_adultos.getText().equals(""))
-			numeroAdultos=0;
-		else
-			numeroAdultos=Integer.valueOf(pc.txt_adultos.getText());
-		if(pc.txt_3edad.getText().equals(""))
-			numero3Edad=0;
-		else
-			numero3Edad=Integer.valueOf(pc.txt_adultos.getText());
-		numeroASientos= numeroAdultos+numeroNiños+numero3Edad;
+			if(pc.txt_adultos.getText().equals("")&&pc.txt_TerceraEdad.getText().equals("")) {
+				numeroAdultos=0;
+				numeroTerceraEdad=0;
+			}else if(pc.txt_adultos.getText().equals("")) {
+				numeroAdultos=0;
+				numeroTerceraEdad=Integer.valueOf(pc.txt_TerceraEdad.getText());
+			}else if(pc.txt_TerceraEdad.getText().equals("")) {
+				numeroTerceraEdad=0;
+				numeroAdultos=Integer.valueOf(pc.txt_adultos.getText());
+			}else {
+				numeroAdultos=Integer.valueOf(pc.txt_adultos.getText());
+				numeroTerceraEdad=Integer.valueOf(pc.txt_TerceraEdad.getText());
+			}
+			numeroASientos= Integer.valueOf(numeroTerceraEdad+numeroAdultos);
+		}
+		print("adulto: "+numeroAdultos+" niños: "+numeroNiños+"numeroTerceraEdad: "+numeroTerceraEdad+"censura:"+comprobarCensura(),1);
+		
 	}
 	
 	public boolean comprobarCensura() {	
-		contarAsientos();
+		//contarAsientos();
 		boolean censura=false;
 		for (int i=0;i<peliculas.length;i++) {
 			if(nombre_Pelicula_Funcion.equals(peliculas[i].getDatos().getAtributoT1())) {
@@ -61,6 +104,7 @@ public class logica_negocio_panelCompra implements configurable {
 			return true;
 			
 	}
+	
 	public void calcularCosto() {
 		calcularSubtotal();	
 		calcularIva();
@@ -69,11 +113,11 @@ public class logica_negocio_panelCompra implements configurable {
 	public void calcularSubtotal() {
 		subtotal=0.0;
 		if(tipo.equals("cine")) {			
-			subtotal=precioBoletoCine*numeroAdultos+((precioBoletoCine/2)*numeroNiños)+((precioBoletoCine/2)*numero3Edad);
+			subtotal=precioBoletoCine*numeroAdultos+((precioBoletoCine/2)*numeroNiños)+((precioBoletoCine/2)*numeroTerceraEdad);
 			pc.txt_subtotal.setText(String.valueOf(decimalFormat.format(subtotal)));
 		}			
 		else if(tipo.equals("teatro")) {
-			subtotal=precioBoletoTeatro*numeroAdultos+((precioBoletoTeatro/2)*numeroNiños)+((precioBoletoTeatro/2)*numero3Edad);
+			subtotal=precioBoletoTeatro*numeroAdultos+((precioBoletoTeatro/2)*numeroNiños)+((precioBoletoTeatro/2)*numeroTerceraEdad);
 			pc.txt_subtotal.setText(String.valueOf(decimalFormat.format(subtotal)));
 		}
 		

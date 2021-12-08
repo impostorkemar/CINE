@@ -1,0 +1,10 @@
+La sirenita,fantasía,1,Obra infantil de cuento de hadas en el mar
+Pinocho,fantasía,1,Obra infantil de un niño de madera
+La senicienta,fantasía,1,Obra infantil de cuento de hadas
+SAW,fantasía,0,Obra de terror psicológico
+SPIDERMAN NO WAY HOME,ciencia ficció,1,Obra de ciencia ficción de superheroes
+El rito,terror,0,Obra de terror ambientada en exorcismos
+El exorcista,terror,0,Obra de terror sobre un caso real de exorcismo
+Vivo,romance,1,Obra de romance de una pareja
+Enterrada,psicol�gica,0,Obra psicol�gica de un asesino
+ENCHUFETV,c�mica,1,Obra c�mica de la empresa ecuatoriana Enchufetv

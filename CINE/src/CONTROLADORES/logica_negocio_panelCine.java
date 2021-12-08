@@ -27,12 +27,14 @@ public class logica_negocio_panelCine implements configurable {
 	}
 	
 	public void cargarInformacionPanelDetalles() {
-		for(int j=0; j<10;j++) {			
+		for(int j=0; j<10;j++) {		
+			
 			if(pc.comboBox.getSelectedItem().toString().equals(peliculas[j].getDatos().getAtributoT1())) {
 				pc.txt_nombre.setText(peliculas[j].getDatos().getAtributoT1());
-				if(pc.txt_censura.getText().equals("1"))
+				//print("censura: "+peliculas[j].getDatos().getAtributoS1(),1);
+				if(Boolean.valueOf(peliculas[j].getDatos().getAtributoS1())==false)
 					pc.txt_censura.setText("NO");
-				else 
+				else if((Boolean.valueOf(peliculas[j].getDatos().getAtributoS1())==true)) 
 					pc.txt_censura.setText("SI");				
 				pc.txt_genero.setText(peliculas[j].getDatos().getAtributoT2());
 				pc.txtA_sinapsis.setText(peliculas[j].getDatos().getAtributoT3());

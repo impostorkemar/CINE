@@ -1,0 +1,10 @@
+La sirenita,fantasía,1,Pelicula infantil de cuento de hadas en el mar
+Pinocho,fantasía,1,Pelicula infantil de un niño de madera
+La senicienta,fantasía,1,Pelicula infantil de cuento de hadas
+SAW,fantasía,0,Pelicula terror psicológico
+SPIDERMAN NO WAY HOME,ciencia ficció,1,Pelicula ciencia ficción de superheroes
+El rito,terror,0,Pelicula terror ambientada en exorcismos
+El exorcista,terror,0,Pelicula terror sobre un caso real de exorcismo
+Vivo,romance,1,Pelicula romance de una pareja
+Enterrada,psicol�gica,0,Pelicula psicol�gica de un asesino
+ENCHUFETV,c�mica,1,Pelicula c�mica de la empresa ecuatoriana Enchufetv
