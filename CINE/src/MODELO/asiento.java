@@ -30,7 +30,7 @@ public class asiento {
 		
 		@Override
 		public String toString() {
-			return "asiento [datos=" + datos.getAtributoT1() +","+datos.getAtributoT2()+","+datos.getAtributoS1()+","+
+			return  datos.getAtributoT1() +","+datos.getAtributoT2()+","+datos.getAtributoS1()+","+
 		datos.getAtributoS2()+ ", ocupado=" + ocupado ;
 		}
 			

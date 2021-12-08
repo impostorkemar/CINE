@@ -8,10 +8,12 @@ import patron_generico_g2.archivos;
 import patron_generico_g2.configurable;
 
 public class logica_negocio_panelCine implements configurable {
+	private cine ARCANE;
 	private panel_cine pc;	
 	private pelicula[] peliculas;
 	
-	public logica_negocio_panelCine(panel_cine pc_,pelicula[] peliculas_) {
+	public logica_negocio_panelCine(panel_cine pc_,pelicula[] peliculas_, cine ARCANE_) {
+		this.ARCANE=ARCANE_;
 		this.pc= pc_;		
 		peliculas= peliculas_;
 		cargarPeliculasComboBox();
@@ -42,5 +44,12 @@ public class logica_negocio_panelCine implements configurable {
 		}
 		
 	}
+	public cine getARCANE() {
+		return ARCANE;
+	}
+	public void setARCANE(cine aRCANE) {
+		ARCANE = aRCANE;
+	}
+	
 	
 }

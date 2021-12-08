@@ -29,9 +29,15 @@ public class logica_negocio implements configurable {
 	private panel_menu pm;	
 	private final String pathnameP="src/ARCHIVOS/taquilla.txt";	
 	private final String pathnameO="src/ARCHIVOS/obras.txt";
+	private final String pathnameS="src/ARCHIVOS/";
+	private sala[] salasCine_;
+	private sala[] salasTeatro_;
+	
 	Pattern patron;
 	Matcher analisis;
-	
+	public logica_negocio() {
+		archivo= new archivos();
+	}
 	public logica_negocio(panel_menu pm_) {
 		this.pm= pm_;		
 		peliculas= new pelicula[10];	
@@ -41,6 +47,7 @@ public class logica_negocio implements configurable {
 		crearPeliculas();
 		crearObras();
 		crearCine();
+		imprimirSalas(ARCANE);
 	}
 	public void crearPeliculas() {	
 		String texto="", texto1="";
@@ -189,9 +196,36 @@ public class logica_negocio implements configurable {
 			}
 		}
 		*/
-		
+		salasCine_=salasCine;
+		salasTeatro_=salasTeatro;
 		ARCANE= new cine("ARCANE","Quito Estadio Olímpico",salasCine,salasTeatro);
-		print(ARCANE.toString(),1);
+		//print(ARCANE.toString(),1);
+		
+	}
+	public cine getARCANE() {
+		return ARCANE;
+	}
+	public void setARCANE(cine aRCANE) {
+		ARCANE = aRCANE;
+	}
+	public void imprimirSalas(cine ARCANE) {		
+		String texto1="", texto2="";
+		sala[] salaAuxC= new sala[10];
+		sala[] salaAuxT= new sala[10];
+		salaAuxC=ARCANE.getSalasVisuales();
+		salaAuxT=ARCANE.getSalasTeatro();
+		
+		for(int i=0;i<salaAuxC.length;i++) {
+			texto1=salaAuxC[i].toString();
+			//print(texto1,1);		
+			archivo.escribir(pathnameS+salaAuxC[i].getNombre()+"_cine.txt", texto1,true);
+		}
+		for(int i=0;i<salaAuxT.length;i++) {
+			texto2=salaAuxT[i].toString();
+			//print(texto2,1);
+			archivo.escribir(pathnameS+salaAuxT[i].getNombre()+"_obra.txt", texto2,true);
+		}
+		
 		
 	}
 	//GETTERS AND SETTERS
