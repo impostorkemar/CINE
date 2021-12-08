@@ -32,7 +32,7 @@ public class ventana_principal extends JFrame {
 	 */
 	public ventana_principal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(10, 11, 500, 510);
+		setBounds(10, 31, 555, 585);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));

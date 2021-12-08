@@ -15,21 +15,20 @@ import java.awt.event.ActionEvent;
 
 public class panel_compra extends JPanel {
 	private JPanel panel_cine;
+	private JPanel panel_asientos;
 	public JTextField txt_cedula;
 	public JTextField txt_nombre;
 	public JTextField txt_telefono;
 	public JTextField txt_adultos;
 	public JTextField txt_niños;
-	public JTextField txt_TerceraEdad;
 	public JTextField txt_evento;
 	public JTextField txt_subtotal;
 	public JTextField txt_iva;
 	public JTextField txt_total;
 	public JTextArea txt_direccion;
-	
+	public JTextField txt_3edad;
 	
 	private logica_negocio_panelCompra ln_pc;
-	
 	
 	/**
 	 * Create the panel.
@@ -135,24 +134,18 @@ public class panel_compra extends JPanel {
 		txt_total.setBounds(239, 378, 115, 20);
 		panel_datos.add(txt_total);
 		
-		JLabel lblEdad = new JLabel("3 EDAD");
-		lblEdad.setBounds(96, 214, 49, 14);
-		panel_datos.add(lblEdad);
-		
 		JButton btn_aceptar = new JButton("ACEPTAR");
 		btn_aceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(ln_pc.comprobarCensura()) {					
+				if(ln_pc.comprobarCensura()) {
 					ln_pc.crearPersona();
-					ln_pc.contarAsientos();
 					ln_pc.calcularCosto();
-					ln_pc.print("Datos registrados",2);					
-				}else if(!ln_pc.comprobarCensura()){
-					ln_pc.crearPersona();
-					ln_pc.contarAsientos();
-					ln_pc.calcularCosto();
-					ln_pc.print("Datos registrados",2);
-				}else 
+					ln_pc.print("Datos registrados",2);	
+					panel_datos.setVisible(false);
+					panel_asientos=new panel_asientos();
+					panel_asientos.setBounds(10, 22, 700, 538);
+					add(panel_asientos);
+				}else 					
 					limpiar();			}
 		});
 		btn_aceptar.setBounds(21, 365, 106, 23);
@@ -171,12 +164,14 @@ public class panel_compra extends JPanel {
 		btn_cancelar.setBounds(21, 316, 106, 23);
 		panel_datos.add(btn_cancelar);
 		
-		txt_TerceraEdad = new JTextField();
-		txt_TerceraEdad.setColumns(10);
-		txt_TerceraEdad.setBounds(84, 233, 63, 20);
-		panel_datos.add(txt_TerceraEdad);
+		JLabel lblEdad = new JLabel("3 EDAD");
+		lblEdad.setBounds(96, 214, 49, 14);
+		panel_datos.add(lblEdad);
 		
-		
+		txt_3edad = new JTextField();
+		txt_3edad.setColumns(10);
+		txt_3edad.setBounds(83, 233, 63, 20);
+		panel_datos.add(txt_3edad);
 		ln_pc=new logica_negocio_panelCompra(this, peliculas,nombrePelicula,tipo);
 		
 		if(!ln_pc.comprobarCensura()) {
