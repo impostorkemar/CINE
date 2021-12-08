@@ -26,7 +26,7 @@ public class panel_compra extends JPanel {
 	public JTextField txt_iva;
 	public JTextField txt_total;
 	public JTextArea txt_direccion;
-	public JTextField txt_3edad;
+	public JTextField txt_TerceraEdad;
 	
 	private logica_negocio_panelCompra ln_pc;
 	
@@ -139,13 +139,17 @@ public class panel_compra extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if(ln_pc.comprobarCensura()) {
 					ln_pc.crearPersona();
+					ln_pc.contarAsientos();
 					ln_pc.calcularCosto();
 					ln_pc.print("Datos registrados",2);	
-					panel_datos.setVisible(false);
-					panel_asientos=new panel_asientos();
-					panel_asientos.setBounds(10, 22, 700, 538);
-					add(panel_asientos);
-				}else 					
+					
+				}else if(!ln_pc.comprobarCensura())	{
+					ln_pc.crearPersona();
+					ln_pc.contarAsientos();
+					ln_pc.calcularCosto();
+					ln_pc.print("Datos registrados",2);	
+					
+				}else
 					limpiar();			}
 		});
 		btn_aceptar.setBounds(21, 365, 106, 23);
@@ -168,16 +172,22 @@ public class panel_compra extends JPanel {
 		lblEdad.setBounds(96, 214, 49, 14);
 		panel_datos.add(lblEdad);
 		
-		txt_3edad = new JTextField();
-		txt_3edad.setColumns(10);
-		txt_3edad.setBounds(83, 233, 63, 20);
-		panel_datos.add(txt_3edad);
+		txt_TerceraEdad = new JTextField();
+		txt_TerceraEdad.setColumns(10);
+		txt_TerceraEdad.setBounds(83, 233, 63, 20);
+		panel_datos.add(txt_TerceraEdad);
 		ln_pc=new logica_negocio_panelCompra(this, peliculas,nombrePelicula,tipo);
 		
 		if(!ln_pc.comprobarCensura()) {
 			txt_niños.setEditable(false);
 		}
 		
+	}
+	public void desplegarAsientos() {
+		
+		panel_asientos=new panel_asientos();
+		panel_asientos.setBounds(10, 22, 700, 538);
+		add(panel_asientos);
 	}
 	public void limpiar() {
 		txt_subtotal.setText("");
