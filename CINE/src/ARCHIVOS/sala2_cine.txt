@@ -2,7 +2,7 @@
 sala2 tipo=cine
 	
 horario0 [funcion [La senicienta , fantasía ,false , Pelicula infantil de cuento de hadas]
-	asiento0,IMAX,0,0, ocupado=false
+	asiento0,IMAX,0,0, ocupado=true
 	asiento1,IMAX,0,1, ocupado=false
 	asiento2,IMAX,0,2, ocupado=false
 	asiento3,IMAX,0,3, ocupado=false
@@ -63,7 +63,7 @@ horario0 [funcion [La senicienta , fantasía ,false , Pelicula infantil de cuent
 	asiento4_8,NORMALES,4,8, ocupado=false
 	asiento4_9,NORMALES,4,9, ocupado=false
 horario1 [funcion [La senicienta , fantasía ,false , Pelicula infantil de cuento de hadas]
-	asiento0,IMAX,0,0, ocupado=false
+	asiento0,IMAX,0,0, ocupado=true
 	asiento1,IMAX,0,1, ocupado=false
 	asiento2,IMAX,0,2, ocupado=false
 	asiento3,IMAX,0,3, ocupado=false
