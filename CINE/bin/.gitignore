@@ -2,7 +2,12 @@
 /.project
 /ARCHIVOS/
 /CONTROLADORES/
+<<<<<<< HEAD
 /LIBRERÍAS/
 /MODELO/
 /VISTA/
 /Iconos/
+=======
+/MODELO/
+/ARCHIVOS/
+>>>>>>> 1083b846ae5b2a44d20fd58e358d0a440802ecac

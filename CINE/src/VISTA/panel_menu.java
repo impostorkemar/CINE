@@ -35,7 +35,7 @@ public class panel_menu extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				setLayout(null);
 				panel_menu.setVisible(false);
-				panel_cine= new panel_cine(ln.getPeliculas());
+				panel_cine= new panel_cine(ln.getPeliculas(),ln.getARCANE());
 				panel_cine.setBounds(20, -30, 800, 500);
 				add(panel_cine);				
 				
@@ -50,7 +50,7 @@ public class panel_menu extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				setLayout(null);
 				panel_menu.setVisible(false);
-				panel_teatro= new panel_teatro(ln.getPeliculas());
+				panel_teatro= new panel_teatro(ln.getPeliculas(),ln.getARCANE());
 				panel_teatro.setBounds(10, 11, 355, 460);
 				add(panel_teatro);
 			}

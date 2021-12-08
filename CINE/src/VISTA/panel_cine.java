@@ -9,6 +9,7 @@ import javax.swing.JRadioButton;
 
 import CONTROLADORES.logica_negocio_panelCine;
 import CONTROLADORES.logica_negocio;
+import MODELO.cine;
 import MODELO.pelicula;
 
 import javax.swing.JComboBox;
@@ -40,7 +41,7 @@ public class panel_cine extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public panel_cine(pelicula[] peliculas) {
+	public panel_cine(pelicula[] peliculas, cine ARCANE) {
 		setLayout(null);
 		
 		panel_cine = new JPanel();
@@ -73,7 +74,7 @@ public class panel_cine extends JPanel {
 				setLayout(null);
 				panel_cine.setVisible(false);			
 				panel_detalles.setVisible(false);
-				panel_datos= new panel_compra(peliculas, comboBox.getSelectedItem().toString(),"cine");
+				panel_datos= new panel_compra(peliculas, comboBox.getSelectedItem().toString(),"cine",ARCANE);
 				panel_datos.setBounds(10, 11, 439, 468);
 				add(panel_datos);
 			}
@@ -135,6 +136,6 @@ public class panel_cine extends JPanel {
 		txtA_sinapsis.setBounds(121, 115, 270, 36);
 		panel_detalles.add(txtA_sinapsis);
 		
-		c_pc= new logica_negocio_panelCine(this, peliculas);
+		c_pc= new logica_negocio_panelCine(this, peliculas,ARCANE);
 	}
 }

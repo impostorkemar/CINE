@@ -9,13 +9,20 @@ import patron_generico_g2.archivos;
 import patron_generico_g2.configurable;
 
 public class logica_negocio_panelCine implements configurable {
+	private cine ARCANE;
 	private panel_cine pc;	
 	private pelicula[] peliculas;
 	private panel_Cartelera pcc;
 	
+<<<<<<< HEAD
 	public logica_negocio_panelCine(panel_cine pc_,pelicula[] peliculas_) {
 		this.pc= pc_;	
 		this.pcc=pcc;
+=======
+	public logica_negocio_panelCine(panel_cine pc_,pelicula[] peliculas_, cine ARCANE_) {
+		this.ARCANE=ARCANE_;
+		this.pc= pc_;		
+>>>>>>> 1083b846ae5b2a44d20fd58e358d0a440802ecac
 		peliculas= peliculas_;
 		cargarPeliculasComboBox();
 		//pc.panel_detallesFuncion.setVisible(false);	
@@ -44,5 +51,12 @@ public class logica_negocio_panelCine implements configurable {
 		}
 		
 	}
+	public cine getARCANE() {
+		return ARCANE;
+	}
+	public void setARCANE(cine aRCANE) {
+		ARCANE = aRCANE;
+	}
+	
 	
 }

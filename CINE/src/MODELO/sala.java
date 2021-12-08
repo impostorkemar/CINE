@@ -8,6 +8,7 @@ import patron_generico_g2.atributos_gen;
 public class sala {
 	//ATRIBUTOS
 	private String nombre;
+	
 	private String tipo;
 	private asiento [] asientosIMAX;
 	private asiento [][] asientosNormales;
@@ -51,6 +52,12 @@ public class sala {
 	public void setHorarios(horario[] horarios) {
 		this.horarios = horarios;
 	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 	//METODOS
 	public void crearIMAX() {
 		asientosIMAX= new asiento[10];
@@ -64,13 +71,29 @@ public class sala {
 	public String ImprimirHorarios() {
 		String resultado="";
 		for(int i=0; i<2; i++) {
-			resultado+=horarios[i].toString()+"\n\t";
+			resultado+="\n"+horarios[i].toString()+imprimirSalasIMAX()+imprimirSalasNORMALES();
+		}
+		return resultado;
+	}
+	public String imprimirSalasIMAX() {
+		String resultado="";
+		for(int i=0;i<10;i++) {
+			resultado+="\n\t"+asientosIMAX[i].toString();
+		}
+		return resultado;
+	}
+	public String imprimirSalasNORMALES() {
+		String resultado="";
+		for(int m=0; m<5;m++) {
+			for(int l=0;l<10;l++) {			
+				resultado+="\n\t"+asientosNormales[m][l].toString();
+			}
 		}
 		return resultado;
 	}
 	@Override
 	public String toString() {
-		return "\n"+nombre+" tipo=" + tipo + "\n\t"+ ImprimirHorarios() ;
+		return "\n"+nombre+" tipo=" + tipo + "\n\t"+ ImprimirHorarios();
 	}
 		
 	

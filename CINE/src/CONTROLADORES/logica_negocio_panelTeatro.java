@@ -1,15 +1,18 @@
 package CONTROLADORES;
 
+import MODELO.cine;
 import MODELO.pelicula;
 import VISTA.panel_cine;
 import VISTA.panel_teatro;
 import patron_generico_g2.configurable;
 
 public class logica_negocio_panelTeatro implements configurable {
+	private cine ARCANE;
 	private panel_teatro pt;
 	private pelicula[] peliculas;
 	
-	public logica_negocio_panelTeatro(panel_teatro pc_,pelicula[] peliculas_) {
+	public logica_negocio_panelTeatro(panel_teatro pc_,pelicula[] peliculas_,cine ARCANE_) {
+		this.ARCANE=ARCANE_;
 		this.pt= pc_;		
 		peliculas= peliculas_;
 		cargarPeliculasComboBox();
@@ -37,5 +40,12 @@ public class logica_negocio_panelTeatro implements configurable {
 		}
 		
 	}
+	public cine getARCANE() {
+		return ARCANE;
+	}
+	public void setARCANE(cine aRCANE) {
+		ARCANE = aRCANE;
+	}
+	
 	
 }

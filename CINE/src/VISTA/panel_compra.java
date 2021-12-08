@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import CONTROLADORES.logica_negocio_panelCompra;
+import MODELO.cine;
 import MODELO.pelicula;
 import VISTA.panel_menu;
 
@@ -12,6 +13,7 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 public class panel_compra extends JPanel {
 	private JPanel panel_cine;
@@ -27,17 +29,19 @@ public class panel_compra extends JPanel {
 	public JTextField txt_total;
 	public JTextArea txt_direccion;
 	public JTextField txt_TerceraEdad;
+	public JComboBox combobox_horario;
 	
 	private logica_negocio_panelCompra ln_pc;
+	
 	
 	/**
 	 * Create the panel.
 	 */
-	public panel_compra(pelicula[] peliculas,String nombrePelicula,String tipo) {
+	public panel_compra(pelicula[] peliculas,String nombrePelicula,String tipo,cine ARCANE) {
 		setLayout(null);
 		
 		JPanel panel_datos = new JPanel();
-		panel_datos.setBounds(10, 11, 430, 474);
+		panel_datos.setBounds(31, 21, 379, 416);
 		add(panel_datos);
 		panel_datos.setLayout(null);
 		
@@ -46,15 +50,15 @@ public class panel_compra extends JPanel {
 		panel_datos.add(lblNewLabel);
 		
 		JLabel lblNombre = new JLabel("NOMBRE");
-		lblNombre.setBounds(10, 53, 56, 14);
+		lblNombre.setBounds(10, 46, 56, 14);
 		panel_datos.add(lblNombre);
 		
 		JLabel lblTelefono = new JLabel("TELEFONO");
-		lblTelefono.setBounds(10, 93, 79, 14);
+		lblTelefono.setBounds(10, 78, 79, 14);
 		panel_datos.add(lblTelefono);
 		
 		JLabel lblDireccionn = new JLabel("DIRECCION");
-		lblDireccionn.setBounds(10, 134, 79, 14);
+		lblDireccionn.setBounds(10, 111, 79, 14);
 		panel_datos.add(lblDireccionn);
 		
 		txt_cedula = new JTextField();
@@ -64,52 +68,52 @@ public class panel_compra extends JPanel {
 		
 		txt_nombre = new JTextField();
 		txt_nombre.setColumns(10);
-		txt_nombre.setBounds(143, 50, 211, 20);
+		txt_nombre.setBounds(143, 47, 211, 20);
 		panel_datos.add(txt_nombre);
 		
 		txt_telefono = new JTextField();
 		txt_telefono.setColumns(10);
-		txt_telefono.setBounds(143, 90, 211, 20);
+		txt_telefono.setBounds(143, 75, 211, 20);
 		panel_datos.add(txt_telefono);
 		
 		txt_direccion = new JTextArea();
-		txt_direccion.setBounds(143, 129, 211, 74);
+		txt_direccion.setBounds(143, 106, 211, 74);
 		panel_datos.add(txt_direccion);
 		
 		txt_adultos = new JTextField();
-		txt_adultos.setBounds(10, 233, 63, 20);
+		txt_adultos.setBounds(26, 280, 63, 20);
 		panel_datos.add(txt_adultos);
 		txt_adultos.setColumns(10);
 		
 		txt_niños = new JTextField();
 		txt_niños.setColumns(10);
-		txt_niños.setBounds(157, 233, 56, 20);
+		txt_niños.setBounds(174, 280, 56, 20);
 		panel_datos.add(txt_niños);
 		
 		txt_evento = new JTextField();
 		txt_evento.setEditable(false);
 		txt_evento.setColumns(10);
-		txt_evento.setBounds(223, 233, 131, 20);
+		txt_evento.setBounds(223, 191, 131, 20);
 		panel_datos.add(txt_evento);
 		
 		JLabel lblAdultos = new JLabel("ADULTOS");
-		lblAdultos.setBounds(10, 214, 63, 14);
+		lblAdultos.setBounds(26, 255, 63, 14);
 		panel_datos.add(lblAdultos);
 		
 		JLabel lblNios = new JLabel("NI\u00D1OS");
-		lblNios.setBounds(157, 214, 49, 14);
+		lblNios.setBounds(181, 255, 49, 14);
 		panel_datos.add(lblNios);
 		
 		JLabel lblEvento = new JLabel("EVENTO");
-		lblEvento.setBounds(255, 214, 79, 14);
+		lblEvento.setBounds(108, 194, 63, 14);
 		panel_datos.add(lblEvento);
 		
 		JLabel lblSubtotal = new JLabel("SUBTOTAL");
-		lblSubtotal.setBounds(156, 297, 79, 14);
+		lblSubtotal.setBounds(156, 320, 79, 14);
 		panel_datos.add(lblSubtotal);
 		
 		JLabel lblNios_1_1 = new JLabel("IVA");
-		lblNios_1_1.setBounds(156, 338, 79, 14);
+		lblNios_1_1.setBounds(156, 350, 79, 14);
 		panel_datos.add(lblNios_1_1);
 		
 		JLabel lblNios_1_2 = new JLabel("TOTAL");
@@ -119,13 +123,13 @@ public class panel_compra extends JPanel {
 		txt_subtotal = new JTextField();
 		txt_subtotal.setEditable(false);
 		txt_subtotal.setColumns(10);
-		txt_subtotal.setBounds(239, 294, 115, 20);
+		txt_subtotal.setBounds(239, 314, 115, 20);
 		panel_datos.add(txt_subtotal);
 		
 		txt_iva = new JTextField();
 		txt_iva.setEditable(false);
 		txt_iva.setColumns(10);
-		txt_iva.setBounds(239, 335, 115, 20);
+		txt_iva.setBounds(239, 347, 115, 20);
 		panel_datos.add(txt_iva);
 		
 		txt_total = new JTextField();
@@ -140,17 +144,19 @@ public class panel_compra extends JPanel {
 				if(ln_pc.comprobarCensura()) {
 					ln_pc.crearPersona();
 					ln_pc.contarAsientos();
-					ln_pc.calcularCosto();
+					ln_pc.calcularCosto();					
 					ln_pc.print("Datos registrados",2);	
-					
 				}else if(!ln_pc.comprobarCensura())	{
 					ln_pc.crearPersona();
 					ln_pc.contarAsientos();
 					ln_pc.calcularCosto();
-					ln_pc.print("Datos registrados",2);	
+					ln_pc.reservarAsiento("asiento0", "IMAX");
 					
 				}else
-					limpiar();			}
+					limpiar();			
+				ln_pc.reservarAsiento("asiento0", "IMAX");
+			}
+				
 		});
 		btn_aceptar.setBounds(21, 365, 106, 23);
 		panel_datos.add(btn_aceptar);
@@ -159,24 +165,40 @@ public class panel_compra extends JPanel {
 		btn_cancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel_datos.setVisible(false);
-				panel_cine= new panel_cine(peliculas);
+				panel_cine= new panel_cine(peliculas,ARCANE);
 				panel_cine.setBounds(10, 11, 439, 468);
 				add(panel_cine);
 				limpiar();
 			}
 		});
-		btn_cancelar.setBounds(21, 316, 106, 23);
+		btn_cancelar.setBounds(21, 331, 106, 23);
 		panel_datos.add(btn_cancelar);
 		
 		JLabel lblEdad = new JLabel("3 EDAD");
-		lblEdad.setBounds(96, 214, 49, 14);
+		lblEdad.setBounds(108, 255, 49, 14);
 		panel_datos.add(lblEdad);
 		
 		txt_TerceraEdad = new JTextField();
 		txt_TerceraEdad.setColumns(10);
-		txt_TerceraEdad.setBounds(83, 233, 63, 20);
+		txt_TerceraEdad.setBounds(101, 280, 63, 20);
 		panel_datos.add(txt_TerceraEdad);
-		ln_pc=new logica_negocio_panelCompra(this, peliculas,nombrePelicula,tipo);
+		
+		JButton btn_Asientos = new JButton("ASIENTOS");
+		btn_Asientos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btn_Asientos.setBounds(251, 279, 89, 23);
+		panel_datos.add(btn_Asientos);
+		
+		combobox_horario = new JComboBox();
+		combobox_horario.setBounds(223, 222, 131, 22);
+		panel_datos.add(combobox_horario);
+		
+		JLabel lbl_horario = new JLabel("HORARIO");
+		lbl_horario.setBounds(108, 226, 79, 14);
+		panel_datos.add(lbl_horario);
+		ln_pc=new logica_negocio_panelCompra(this, peliculas,nombrePelicula,tipo,ARCANE);
 		
 		if(!ln_pc.comprobarCensura()) {
 			txt_niños.setEditable(false);
