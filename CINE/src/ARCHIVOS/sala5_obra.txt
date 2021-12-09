@@ -1,8 +1,8 @@
 
 sala5 tipo=teatro
 	
-horario0 [funcion [El rito , terror ,true , Obra de terror ambientada en exorcismos]
-	asiento0,IMAX,0,0, ocupado=true
+sala5_horario0 [funcion [El rito , terror ,true , Obra de terror ambientada en exorcismos]]
+	asiento0,IMAX,0,0, ocupado=false
 	asiento1,IMAX,0,1, ocupado=false
 	asiento2,IMAX,0,2, ocupado=false
 	asiento3,IMAX,0,3, ocupado=false
@@ -62,8 +62,8 @@ horario0 [funcion [El rito , terror ,true , Obra de terror ambientada en exorcis
 	asiento4_7,NORMALES,4,7, ocupado=false
 	asiento4_8,NORMALES,4,8, ocupado=false
 	asiento4_9,NORMALES,4,9, ocupado=false
-horario1 [funcion [El rito , terror ,true , Obra de terror ambientada en exorcismos]
-	asiento0,IMAX,0,0, ocupado=true
+sala5_horario1 [funcion [El rito , terror ,true , Obra de terror ambientada en exorcismos]]
+	asiento0,IMAX,0,0, ocupado=false
 	asiento1,IMAX,0,1, ocupado=false
 	asiento2,IMAX,0,2, ocupado=false
 	asiento3,IMAX,0,3, ocupado=false

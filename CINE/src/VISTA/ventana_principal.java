@@ -38,8 +38,8 @@ public class ventana_principal extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		panel_menu menu_ = new panel_menu();
-		contentPane.add(menu_, BorderLayout.CENTER);
+		panel_menu panel_menu_ = new panel_menu();
+		contentPane.add(panel_menu_, BorderLayout.CENTER);
 	}
 
 }

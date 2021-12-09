@@ -1,8 +1,8 @@
 
 sala9 tipo=teatro
 	
-horario0 [funcion [ENCHUFETV , cómica ,false , Obra cómica de la empresa ecuatoriana Enchufetv]
-	asiento0,IMAX,0,0, ocupado=true
+sala9_horario0 [funcion [ENCHUFETV , cómica ,false , Obra cómica de la empresa ecuatoriana Enchufetv]]
+	asiento0,IMAX,0,0, ocupado=false
 	asiento1,IMAX,0,1, ocupado=false
 	asiento2,IMAX,0,2, ocupado=false
 	asiento3,IMAX,0,3, ocupado=false
@@ -62,8 +62,8 @@ horario0 [funcion [ENCHUFETV , cómica ,false , Obra cómica de la empresa ecuator
 	asiento4_7,NORMALES,4,7, ocupado=false
 	asiento4_8,NORMALES,4,8, ocupado=false
 	asiento4_9,NORMALES,4,9, ocupado=false
-horario1 [funcion [ENCHUFETV , cómica ,false , Obra cómica de la empresa ecuatoriana Enchufetv]
-	asiento0,IMAX,0,0, ocupado=true
+sala9_horario1 [funcion [ENCHUFETV , cómica ,false , Obra cómica de la empresa ecuatoriana Enchufetv]]
+	asiento0,IMAX,0,0, ocupado=false
 	asiento1,IMAX,0,1, ocupado=false
 	asiento2,IMAX,0,2, ocupado=false
 	asiento3,IMAX,0,3, ocupado=false

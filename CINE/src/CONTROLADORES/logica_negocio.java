@@ -129,76 +129,47 @@ public class logica_negocio implements configurable {
 		}	
 		//print("aux: "+aux,1);
 	}
-	public void crearCine() {		
+	public asiento[] crearAsientosI() {
 		asiento[] asientosI= new asiento[10];
+		for(int k=0;k<10;k++) {
+			asientosI[k]= new asiento("asiento"+k,"IMAX", 0, k, false);			
+		}
+		return asientosI;
+	}
+	public asiento[][] crearASientosN() {
 		asiento[][] asientosN= new asiento[5][10];
-		horario[] horarios= new horario[2];
+		for(int m=0; m<5;m++) {
+			for(int l=0;l<10;l++) {			
+				asientosN[m][l]= new asiento("asiento"+m+"_"+l,"NORMALES", m, l, false);				
+			}
+		}
+		return asientosN;
+	}
+	public horario[]  crearHorarios(int i,String nombreSala, pelicula[] funciones) {
+		horario[] auxHorarios1= new horario[2];	
+		for(int p=0;p<2;p++) {		
+			auxHorarios1[p]=new horario(nombreSala+"_horario"+p,funciones[i].getDatos().getAtributoT1(),funciones[i].getDatos().getAtributoT2(),
+					funciones[i].getDatos().getAtributoS1(),funciones[i].getDatos().getAtributoT3(),crearAsientosI(),crearASientosN());
+		}
+		return auxHorarios1;
+	}
+	public sala[] crearSalasCine() {
 		sala[] salasCine= new sala[10];
+		for(int i=0;i<10;i++) {			
+			salasCine[i]= new sala("sala"+i,crearHorarios(i,"sala"+i,peliculas), "cine");	
+		}		
+		return salasCine;
+	}
+	public sala[] crearSalasObra() {
 		sala[] salasTeatro= new sala[10];
-				
-		for(int k=0;k<10;k++) {
-			asientosI[k]= new asiento("asiento"+k,"IMAX", 0, k, false);
-		}
-		for(int m=0; m<5;m++) {
-			for(int l=0;l<10;l++) {			
-				asientosN[m][l]= new asiento("asiento"+m+"_"+l,"NORMALES", m, l, false);
-			}
-		}
-		/*print("\nPELICULAS\n",1);
-		for(int j=0; j<10;j++) {
-			System.out.println(j+":"+peliculas[j]);
-		}
-		print("\nOBRAS\n",1);
-		for(int j=0; j<10;j++) {
-			System.out.println(j+":"+obras[j]);
-
-		}*/
-		for(int i=0;i<10;i++) {
-			
-			horario[] auxHorarios1= new horario[2];
-			for(int p=0;p<2;p++) {		
-				auxHorarios1[p]=new horario("horario"+p,peliculas[i].getDatos().getAtributoT1(),peliculas[i].getDatos().getAtributoT2(),
-						peliculas[i].getDatos().getAtributoS1(),peliculas[i].getDatos().getAtributoT3());
-
-			}			
-			//print("horario -> "+auxHorarios1[0].toString(),1);
-			//print("horario -> "+auxHorarios1[1].toString(),1);
-			
-			horarios= auxHorarios1;
-			
-			salasCine[i]= new sala("sala"+i,asientosN, asientosI, horarios, "cine");	
-			//print("salaC ("+i+") "+salasCine[i].toString(),1);
-			
-		}
-		for(int i=0;i<10;i++) {
-			horario[] auxHorarios= new horario[2];
-			for(int p=0;p<2;p++) {		
-				auxHorarios[p]=new horario("horario"+p,obras[i].getDatos().getAtributoT1(),obras[i].getDatos().getAtributoT2(),
-						obras[i].getDatos().getAtributoS1(),obras[i].getDatos().getAtributoT3());
-			}			
-			//print("horario -> "+auxHorarios[0].toString(),1);
-			//print("horario -> "+auxHorarios[1].toString(),1);
-			
-			horarios= auxHorarios;
-			
-			salasTeatro[i]= new sala("sala"+i,asientosN, asientosI, horarios, "teatro");	
-			//print("salaT ("+i+") "+salasCine[i].toString(),1);
-			
-		}
-		/*print("ASIENTOS IMAX",1);
-		for(int k=0;k<10;k++) {
-			print("asientoI "+k+" "+asientosI[k].toString(),1);
-		}
-		print("ASIENTOS NORMALES",1);
-		for(int m=0; m<5;m++) {
-			for(int l=0;l<10;l++) {			
-				print("asientoN "+m+"_"+l+" "+asientosN[m][l],1);
-			}
-		}
-		*/
-		salasCine_=salasCine;
-		salasTeatro_=salasTeatro;
-		ARCANE= new cine("ARCANE","Quito Estadio Olímpico",salasCine,salasTeatro);
+		for(int i=0;i<10;i++) {			
+			salasTeatro[i]= new sala("sala"+i,crearHorarios(i,"sala"+i,obras), "teatro");	
+		}		
+		return salasTeatro;
+	}
+	public void crearCine() {		
+		
+		ARCANE= new cine("ARCANE","Quito Estadio Olímpico",crearSalasCine(),crearSalasObra());
 		//print(ARCANE.toString(),1);
 		
 	}

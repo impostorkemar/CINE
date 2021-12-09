@@ -25,7 +25,7 @@ public class pelicula implements configurable{
 	}
 	@Override
 	public String toString() {
-		return "funcion ["+datos.getAtributoT1()+" , "+datos.getAtributoT2()+" ,"+datos.getAtributoS1()+" , "+datos.getAtributoT3();
+		return "funcion ["+datos.getAtributoT1()+" , "+datos.getAtributoT2()+" ,"+datos.getAtributoS1()+" , "+datos.getAtributoT3()+"]";
 	}
 	
 	

@@ -19,7 +19,7 @@ public class logica_negocio_panelTeatro implements configurable {
 		
 	}
 	public void cargarPeliculasComboBox() {
-		System.out.println("COmbo: ");
+		//System.out.println("COmbo: ");
 		for(int j=0; j<10;j++) {
 			pt.comboBox.addItem(peliculas[j].getDatos().getAtributoT1());			
 			//System.out.println(peliculas[j].toString());

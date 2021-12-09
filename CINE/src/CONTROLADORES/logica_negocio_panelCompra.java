@@ -2,10 +2,13 @@ package CONTROLADORES;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
 import MODELO.cine;
+import MODELO.horario;
 import MODELO.pelicula;
 import MODELO.persona;
+import MODELO.sala;
 import VISTA.panel_compra;
 import patron_generico_g2.configurable;
 
@@ -15,13 +18,28 @@ public class logica_negocio_panelCompra implements configurable {
 	private cine ARCANE;
 	private pelicula[] peliculas;
 	private String[] asientos;
-	private int numeroAdultos=0, numeroNiños=0, numeroTerceraEdad=0, numeroAsientos=0;
-	private double iva=0.12, costoAsiento=0.0, precioBoletoCine=4.5,subtotal=0, total=0,precioBoletoTeatro=12.5;
+	public ArrayList<String> nombresAsientos;
+	private int numeroAdultos=0, numeroNiños=0, numeroTerceraEdad=0, numeroAsientos=0;	
 	private String nombre_Pelicula_Funcion, tipo;	
 	private DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(); 
 	
+	public logica_negocio_panelCompra(logica_negocio_panelCompra ln_pc, pelicula[] peliculas_,String nombrePelicula_Funcion,
+			String tipo_,cine ARCANE_) {
+		nombresAsientos=new ArrayList<String>();
+		ARCANE=ARCANE_;
+		decimalFormat.setMinimumFractionDigits(2);
+		this.pc=ln_pc.getPc();
+		pc.setVisible(true);
+		this.peliculas=peliculas_;
+		this.tipo=tipo_;
+		nombre_Pelicula_Funcion=nombrePelicula_Funcion;	
+		pc.txt_evento.setText(nombrePelicula_Funcion);
+		cargarHorarios();
+		
+	}
 	public logica_negocio_panelCompra(panel_compra pc_, pelicula[] peliculas_,String nombrePelicula_Funcion,
 			String tipo_,cine ARCANE_) {
+		nombresAsientos=new ArrayList<String>();
 		ARCANE=ARCANE_;
 		decimalFormat.setMinimumFractionDigits(2);
 		this.pc=pc_;
@@ -137,77 +155,157 @@ public class logica_negocio_panelCompra implements configurable {
 		
 	}
 	public void reservarAsiento(String nombreAsiento, String tipoAsiento) {
+		String salaOfertada="";
 		logica_negocio ln=new logica_negocio();
-		
+		sala[] auxVisuales= new sala[10];
+		sala[] auxObras= new sala[10];
+		horario[] horarios= new horario[2];
 		if(tipo.equals("cine")) {
 			if(tipoAsiento.equals("IMAX")) {
-				for(int i=0;i<10;i++) {
-					 for(int j=0;j<2;j++) {
-						if(nombre_Pelicula_Funcion.equals(ARCANE.getSalasVisuales()[i].getHorarios()[j].getPelicula().getDatos().getAtributoT1())&&
-								 pc.combobox_horario.getSelectedItem().toString().equals(ARCANE.getSalasVisuales()[i].getHorarios()[j].getDatos().getAtributoT1())) {
-							for(int k=0;k<10;k++) {
-								if(ARCANE.getSalasVisuales()[i].getAsientosIMAX()[k].getDatos().getAtributoT1().equals(nombreAsiento)){
-									ARCANE.getSalasVisuales()[i].getAsientosIMAX()[k].setOcupado(true);
-									print("h: "+pc.combobox_horario.getSelectedItem().toString()+
-											" A_h: "+ARCANE.getSalasVisuales()[i].getHorarios()[j].getDatos().getAtributoT1(),1);
-								}	
+				auxVisuales=ARCANE.getSalasVisuales();
+				for(int g=0;g<10;g++) {			
+					for(int j=0;j<2;j++) {				
+						auxVisuales[g].setHorarios(ARCANE.getSalasVisuales()[g].getHorarios());				
+						//System.out.println(auxVisuales[g].getNombre()+"\t"+auxVisuales[g].getHorarios()[j].toString());
+					}			
+				}
+				//BUSQUEDA DE LA SALA DONDE ESTA LA PELICULA/OBRA
+				for(int g=0;g<10;g++) {			
+					for(int j=0;j<2;j++) {
+						if(nombre_Pelicula_Funcion.equals(ARCANE.getSalasVisuales()[g].getHorarios()[j].getPelicula().getDatos().getAtributoT1()))	{
+							salaOfertada=auxVisuales[g].getNombre();
+							//print(salaOfertada,1);
+						}
+					}
+				}	
+				//CAMBIO DE ASIENTO A OCUPADO
+				for(int g=0;g<10;g++) {			
+					for(int j=0;j<2;j++) {
+						for(int k=0;k<10;k++) {
+							if(nombre_Pelicula_Funcion.equals(ARCANE.getSalasVisuales()[g].getHorarios()[j].getPelicula().getDatos().getAtributoT1())&&
+									ARCANE.getSalasVisuales()[g].getHorarios()[j].getDatos().getAtributoT1().equals(pc.combobox_horario.getSelectedItem().toString())&&
+									ARCANE.getSalasVisuales()[g].getHorarios()[j].getAsientosIMAX()[k].getDatos().getAtributoT1().equals(nombreAsiento)) {
+								//print(auxVisuales[g].getNombre()+"\t"+auxVisuales[g].getHorarios()[j].getAsientosIMAX()[k].toString(),1);
+								auxVisuales[g].getHorarios()[j].getAsientosIMAX()[k].setOcupado(true);
 							}
-						}					
-					 }				 
-				 }
-			}else {
-				
+						}
+					}
+				}
+			}else if(tipoAsiento.equals("NORMALES")){
+				auxVisuales=ARCANE.getSalasVisuales();
+				for(int g=0;g<10;g++) {			
+					for(int j=0;j<2;j++) {				
+						auxVisuales[g].setHorarios(ARCANE.getSalasVisuales()[g].getHorarios());				
+						//System.out.println(auxVisuales[g].getNombre()+"\t"+auxVisuales[g].getHorarios()[j].toString());
+					}			
+				}
+				//BUSQUEDA DE LA SALA DONDE ESTA LA PELICULA/OBRA
+				for(int g=0;g<10;g++) {			
+					for(int j=0;j<2;j++) {
+						if(nombre_Pelicula_Funcion.equals(ARCANE.getSalasVisuales()[g].getHorarios()[j].getPelicula().getDatos().getAtributoT1()))	{
+							salaOfertada=auxVisuales[g].getNombre();
+							//print(salaOfertada,1);
+						}
+					}
+				}
+				//BUSQUEDA DE LA SALA DONDE ESTA LA PELICULA/OBRA
+				for(int g=0;g<10;g++) {			
+					for(int j=0;j<2;j++) {
+						for(int k=0;k<5;k++) {
+							for(int x=0;x<10;x++) {
+								if(nombre_Pelicula_Funcion.equals(ARCANE.getSalasVisuales()[g].getHorarios()[j].getPelicula().getDatos().getAtributoT1())&&
+										ARCANE.getSalasVisuales()[g].getHorarios()[j].getDatos().getAtributoT1().equals(pc.combobox_horario.getSelectedItem().toString())&&
+										ARCANE.getSalasVisuales()[g].getHorarios()[j].getAsientosNormales()[k][x].getDatos().getAtributoT1().equals(nombreAsiento)) {
+									//print(auxVisuales[g].getNombre()+"\t"+auxVisuales[g].getHorarios()[j].getAsientosIMAX()[k].toString(),1);
+									auxVisuales[g].getHorarios()[j].getAsientosNormales()[k][x].setOcupado(true);
+								}
+							}
+							
+						}
+					}
+				}
 			}
-			 
 		}else if(tipo.equals("teatro")) {
 			if(tipoAsiento.equals("IMAX")) {
-				for(int i=0;i<10;i++) {
-					 for(int j=0;j<2;j++) {
-						if(nombre_Pelicula_Funcion.equals(ARCANE.getSalasTeatro()[i].getHorarios()[j].getPelicula().getDatos().getAtributoT1())) {
-							for(int k=0;k<10;k++) {
-								if(ARCANE.getSalasTeatro()[i].getAsientosIMAX()[k].getDatos().getAtributoT1().equals(nombreAsiento)){
-									ARCANE.getSalasTeatro()[i].getAsientosIMAX()[k].setOcupado(true);;
-								}	
+				auxObras=ARCANE.getSalasTeatro();
+				for(int g=0;g<10;g++) {			
+					for(int j=0;j<2;j++) {				
+						auxObras[g].setHorarios(ARCANE.getSalasTeatro()[g].getHorarios());
+					}			
+				}
+				//BUSQUEDA DE LA SALA DONDE ESTA LA PELICULA/OBRA
+				for(int g=0;g<10;g++) {			
+					for(int j=0;j<2;j++) {
+						if(nombre_Pelicula_Funcion.equals(ARCANE.getSalasTeatro()[g].getHorarios()[j].getPelicula().getDatos().getAtributoT1()))	{
+							salaOfertada=auxObras[g].getNombre();
+							//print(salaOfertada,1);
+						}
+					}
+				}	
+				//CAMBIO DE ASIENTO A OCUPADO
+				for(int g=0;g<10;g++) {			
+					for(int j=0;j<2;j++) {
+						for(int k=0;k<10;k++) {
+							if(nombre_Pelicula_Funcion.equals(ARCANE.getSalasTeatro()[g].getHorarios()[j].getPelicula().getDatos().getAtributoT1())&&
+									ARCANE.getSalasTeatro()[g].getHorarios()[j].getDatos().getAtributoT1().equals(pc.combobox_horario.getSelectedItem().toString())&&
+									ARCANE.getSalasTeatro()[g].getHorarios()[j].getAsientosIMAX()[k].getDatos().getAtributoT1().equals(nombreAsiento)) {
+								//print(auxObras[g].getNombre()+"\t"+auxObras[g].getHorarios()[j].getAsientosIMAX()[k].toString(),1);
+								auxObras[g].getHorarios()[j].getAsientosIMAX()[k].setOcupado(true);
 							}
-						}					
-					 }				 
-				 }
-			}else {
-				
+						}
+					}
+				}
+			}else if(tipoAsiento.equals("NORMALES")){
+				auxObras=ARCANE.getSalasTeatro();
+				for(int g=0;g<10;g++) {			
+					for(int j=0;j<2;j++) {				
+						auxObras[g].setHorarios(ARCANE.getSalasTeatro()[g].getHorarios());
+					}			
+				}
+				//BUSQUEDA DE LA SALA DONDE ESTA LA PELICULA/OBRA
+				for(int g=0;g<10;g++) {			
+					for(int j=0;j<2;j++) {
+						if(nombre_Pelicula_Funcion.equals(ARCANE.getSalasTeatro()[g].getHorarios()[j].getPelicula().getDatos().getAtributoT1()))	{
+							salaOfertada=auxObras[g].getNombre();
+							//print(salaOfertada,1);
+						}
+					}
+				}	
+				//CAMBIO DE ASIENTO A OCUPADO
+				for(int g=0;g<10;g++) {			
+					for(int j=0;j<2;j++) {
+						for(int k=0;k<5;k++) {
+							for(int x=0; x<10;x++) {
+								if(nombre_Pelicula_Funcion.equals(ARCANE.getSalasTeatro()[g].getHorarios()[j].getPelicula().getDatos().getAtributoT1())&&
+										ARCANE.getSalasTeatro()[g].getHorarios()[j].getDatos().getAtributoT1().equals(pc.combobox_horario.getSelectedItem().toString())&&
+										ARCANE.getSalasTeatro()[g].getHorarios()[j].getAsientosNormales()[k][x].getDatos().getAtributoT1().equals(nombreAsiento)) {
+									//print(auxObras[g].getNombre()+"\t"+auxObras[g].getHorarios()[j].getAsientosIMAX()[k].toString(),1);
+									auxObras[g].getHorarios()[j].getAsientosNormales()[k][x].setOcupado(true);
+								}
+							}
+						}
+					}
+				}
 			}
-			
 		}
-		
 		ln.imprimirSalas(ARCANE);
 	}
-	
-	public void calcularCosto() {
-		calcularSubtotal();	
-		calcularIva();
-		calcularTotal();
-	}
-	public void calcularSubtotal() {
-		subtotal=0.0;
-		if(tipo.equals("cine")) {			
-			subtotal=precioBoletoCine*numeroAdultos+((precioBoletoCine/2)*numeroNiños)+((precioBoletoCine/2)*numeroTerceraEdad);
-			pc.txt_subtotal.setText(String.valueOf(decimalFormat.format(subtotal)));
-		}			
-		else if(tipo.equals("teatro")) {
-			subtotal=precioBoletoTeatro*numeroAdultos+((precioBoletoTeatro/2)*numeroNiños)+((precioBoletoTeatro/2)*numeroTerceraEdad);
-			pc.txt_subtotal.setText(String.valueOf(decimalFormat.format(subtotal)));
+	public void escogerAsientos(ArrayList<String> nombresAsientos) {
+		int i=0;
+		System.out.println("LLEGANDO A COMPRA");
+		for(String auxNombreAsiento:nombresAsientos) {
+			if(auxNombreAsiento.contains("_")) {
+				reservarAsiento(auxNombreAsiento,"NORMALES");
+			}else {
+				reservarAsiento(auxNombreAsiento,"IMAX");
+			}
+				
 		}
-		
+		/*for(String auxNombreAsiento:nombresAsientos) {
+			reservarAsiento(auxNombreAsiento,tipo);
+		}*/
 	}
-	public void calcularTotal() {
-		total=0.0;
-		total=subtotal+iva;
-		pc.txt_total.setText(String.valueOf(decimalFormat.format(total)));		
-	}
-	public void calcularIva() {
-		iva=0.12;
-		iva=subtotal*iva;
-		pc.txt_iva.setText(String.valueOf(decimalFormat.format(iva)));
-	}
+	
 
 	public cine getARCANE() {
 		return ARCANE;
@@ -224,6 +322,47 @@ public class logica_negocio_panelCompra implements configurable {
 	public void setAsientos(String[] asientos) {
 		this.asientos = asientos;
 	}
+
+	public int getNumeroAsientos() {
+		return numeroAsientos;
+	}
+
+	public void setNumeroAsientos(int numeroAsientos) {
+		this.numeroAsientos = numeroAsientos;
+	}
+
+	public ArrayList<String> getNombresAsientos() {
+		return nombresAsientos;
+	}
+
+	public void setNombresAsientos(ArrayList<String> nombresAsientos) {
+		this.nombresAsientos = nombresAsientos;
+	}
+	public panel_compra getPc() {
+		return pc;
+	}
+	public void setPc(panel_compra pc) {
+		this.pc = pc;
+	}
+	public int getNumeroAdultos() {
+		return numeroAdultos;
+	}
+	public void setNumeroAdultos(int numeroAdultos) {
+		this.numeroAdultos = numeroAdultos;
+	}
+	public int getNumeroNiños() {
+		return numeroNiños;
+	}
+	public void setNumeroNiños(int numeroNiños) {
+		this.numeroNiños = numeroNiños;
+	}
+	public int getNumeroTerceraEdad() {
+		return numeroTerceraEdad;
+	}
+	public void setNumeroTerceraEdad(int numeroTerceraEdad) {
+		this.numeroTerceraEdad = numeroTerceraEdad;
+	}
+	
 	
 	
 	
