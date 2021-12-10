@@ -90,7 +90,7 @@ public class panel_teatro extends JPanel {
 				panel_teatro.setVisible(false);
 				panel_detalles.setVisible(false);
 				panel_menu= new panel_menu();
-				panel_menu.setBounds(10, 11, 829, 493);
+				panel_menu.setBounds(0, 0, 1024, 800);
 				add(panel_menu);
 			}
 		});

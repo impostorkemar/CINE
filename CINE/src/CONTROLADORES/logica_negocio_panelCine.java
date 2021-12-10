@@ -1,5 +1,8 @@
 package CONTROLADORES;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 import MODELO.cine;
 import MODELO.pelicula;
 import VISTA.panel_Cartelera;
@@ -13,14 +16,18 @@ public class logica_negocio_panelCine implements configurable {
 	private panel_cine pc;	
 	private pelicula[] peliculas;
 	private panel_Cartelera pcc;
+	private JLabel[] auxi;
 	
 	public logica_negocio_panelCine(panel_cine pc_,pelicula[] peliculas_) {
 		this.pc= pc_;	
-		this.pcc=pcc;
+		this.pcc= new panel_Cartelera();
+		auxi= new JLabel[10];
 	}
 	public logica_negocio_panelCine(panel_cine pc_,pelicula[] peliculas_, cine ARCANE_) {
 		this.ARCANE=ARCANE_;
-		this.pc= pc_;		
+		auxi= new JLabel[10];
+		this.pc= pc_;	
+		this.pcc= new panel_Cartelera();
 		peliculas= peliculas_;
 		cargarPeliculasComboBox();
 		//pc.panel_detallesFuncion.setVisible(false);	
@@ -45,6 +52,28 @@ public class logica_negocio_panelCine implements configurable {
 					pc.txt_censura.setText("SI");				
 				pc.txt_genero.setText(peliculas[j].getDatos().getAtributoT2());
 				pc.txtA_sinapsis.setText(peliculas[j].getDatos().getAtributoT3());
+			}
+	
+			if(pc.txt_nombre.getText().toString().equals("La sirenita")) {
+				pc.lbl_fotos.setIcon(new ImageIcon(panel_Cartelera.class.getResource("/Iconos/Sirenita.jpeg")));
+			}else if(pc.txt_nombre.getText().toString().equals("Pinocho")) {
+				pc.lbl_fotos.setIcon(new ImageIcon(panel_Cartelera.class.getResource("/Iconos/Pinocho.jpg")));
+			}else if(pc.txt_nombre.getText().toString().equals("SAW")) {
+				pc.lbl_fotos.setIcon(new ImageIcon(panel_Cartelera.class.getResource("/Iconos/Saw.jpeg")));
+			}else if(pc.txt_nombre.getText().toString().equals("El exorcista")) {
+				pc.lbl_fotos.setIcon(new ImageIcon(panel_Cartelera.class.getResource("/Iconos/Exorcista.jpeg")));
+			}else if(pc.txt_nombre.getText().toString().equals("SPIDERMAN NO WAY HOME")) {
+				pc.lbl_fotos.setIcon(new ImageIcon(panel_Cartelera.class.getResource("/Iconos/Spiderman.jpeg")));
+			}else if(pc.txt_nombre.getText().toString().equals("La senicienta")) {
+				pc.lbl_fotos.setIcon(new ImageIcon(panel_Cartelera.class.getResource("/Iconos/Senisienta.jpeg")));
+			}else if(pc.txt_nombre.getText().toString().equals("El rito")) {
+				pc.lbl_fotos.setIcon(new ImageIcon(panel_Cartelera.class.getResource("/Iconos/Rito.jpeg")));
+			}else if(pc.txt_nombre.getText().toString().equals("Enterrada")) {
+				pc.lbl_fotos.setIcon(new ImageIcon(panel_Cartelera.class.getResource("/Iconos/enterrado.jpeg")));
+			}else if(pc.txt_nombre.getText().toString().equals("ENCHUFETV")) {
+				pc.lbl_fotos.setIcon(new ImageIcon(panel_Cartelera.class.getResource("/Iconos/Dedidaca_a_mi_ex.jpeg")));
+			}else if(pc.txt_nombre.getText().toString().equals("Vivo")) {
+				pc.lbl_fotos.setIcon(new ImageIcon(panel_Cartelera.class.getResource("/Iconos/Vivo.jpeg")));
 			}
 		}
 		

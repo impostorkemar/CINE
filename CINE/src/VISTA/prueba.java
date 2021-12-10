@@ -42,7 +42,7 @@ public class prueba extends JPanel {
 		
 		JPanel panel_asientos = new JPanel();
 		panel_asientos.setBorder(new TitledBorder(null, "PRUEBA GENERADOR ASIENTOS", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_asientos.setBounds(10, 11, 353, 427);
+		panel_asientos.setBounds(0, 0, 1024, 800);
 		add(panel_asientos);
 		panel_asientos.setLayout(null);
 		
