@@ -7,6 +7,9 @@ import javax.swing.JLabel;
 import javax.swing.Scrollable;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+
+import MODELO.cine;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 public class panel_Cartelera extends JPanel {
@@ -28,7 +31,7 @@ public class panel_Cartelera extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public panel_Cartelera() {
+	public panel_Cartelera(cine ARCANE) {
 		setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -110,7 +113,7 @@ public class panel_Cartelera extends JPanel {
 		btn_menu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panel.setVisible(false);
-				panel_menu= new panel_menu();
+				panel_menu= new panel_menu(ARCANE);
 				panel_menu.setBounds(0, 0, 1024, 800);
 				add(panel_menu);
 			}

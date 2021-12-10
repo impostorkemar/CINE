@@ -28,6 +28,7 @@ public class panel_asientos extends JPanel {
 	public JTextField txt_subtotal;
 	public JTextField txt_total;
 	private cine ARCANE;
+	private panel_menu panel_menu;
 	//private ArrayList<String> nombres;
 	/**
 	 * Create the panel.
@@ -44,7 +45,7 @@ public class panel_asientos extends JPanel {
 		
 		JPanel panel_asientos = new JPanel();
 		panel_asientos.setBorder(new TitledBorder(null, "PRUEBA GENERADOR ASIENTOS", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_asientos.setBounds(10, 11, 353, 427);
+		panel_asientos.setBounds(0, 0 , 1024 ,800);
 		add(panel_asientos);
 		panel_asientos.setLayout(null);
 		
@@ -54,6 +55,11 @@ public class panel_asientos extends JPanel {
 				ln_pA.calcularCosto();
 				ln_pA.reservarAsientosSeleccionados();
 				btn_confirmar.setEnabled(false);
+				ln_pA.impirmirTicket();
+				panel_asientos.setVisible(false);
+				panel_menu= new panel_menu(ARCANE);
+				panel_menu.setBounds(0, 0, 1024, 800);
+				add(panel_menu);
 			}
 		});
 		btn_confirmar.setBounds(230, 364, 94, 23);

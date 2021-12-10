@@ -89,7 +89,7 @@ public class panel_teatro extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				panel_teatro.setVisible(false);
 				panel_detalles.setVisible(false);
-				panel_menu= new panel_menu();
+				panel_menu= new panel_menu(ARCANE);
 				panel_menu.setBounds(0, 0, 1024, 800);
 				add(panel_menu);
 			}

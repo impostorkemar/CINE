@@ -44,7 +44,7 @@ public class panel_cine extends JPanel {
 	 */
 	public panel_cine(pelicula[] peliculas, cine ARCANE) {
 		setLayout(null);
-		this.pcc= new panel_Cartelera();
+		this.pcc= new panel_Cartelera(ARCANE);
 		auxi=pcc.aux;
 		
 		panel_cine = new JPanel();
@@ -59,7 +59,7 @@ public class panel_cine extends JPanel {
 				setLayout(null);
 				panel_cine.setVisible(false);
 			//	panel_detalles.setVisible(false);
-				panel_menu= new panel_menu();
+				panel_menu= new panel_menu(ARCANE);
 				panel_menu.setBounds(0, 0, 1024, 800);
 				add(panel_menu);
 			}

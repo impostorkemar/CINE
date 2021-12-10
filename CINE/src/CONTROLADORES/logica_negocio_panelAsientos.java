@@ -3,6 +3,7 @@ package CONTROLADORES;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JButton;
 
@@ -108,7 +109,12 @@ public class logica_negocio_panelAsientos {
 			ln_pc.print("Escoja asientos solicitados", 2);
 		}
 	}
-	
+	public void impirmirTicket() {
+		Date date=new Date();
+		ln_pc.print("\nTICKET\n\t"+date+ "\nSALA: "+ln_pc.getTipo()+  "\nHorario: "+ln_pc.getSalaH() +
+		"\nPersona: "+ln_pc.getPersona().getDatos().getAtributoT1()+ "\nAsientos: \nIMAX:\n"+nombresI.toString()+"\nNORMALES\n"+
+				nombresN.toString()+"\n",2);
+	}
 	public ArrayList<String> getNombresI() {
 		return nombresI;
 	}

@@ -3,6 +3,7 @@ package VISTA;
 import javax.swing.JPanel;
 
 import CONTROLADORES.logica_negocio;
+import MODELO.cine;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -24,7 +25,7 @@ public class panel_menu extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public panel_menu() {
+	public panel_menu(cine ARCANE) {
 		setLayout(null);
 		
 		panel_menu = new JPanel();
@@ -67,7 +68,7 @@ public class panel_menu extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				setLayout(null);
 				panel_menu.setVisible(false);
-				panel_cartelera= new panel_Cartelera();
+				panel_cartelera= new panel_Cartelera(ARCANE);
 				panel_cartelera.setBounds(0, 0, 1024, 800);
 				add(panel_cartelera);
 			}
@@ -76,6 +77,6 @@ public class panel_menu extends JPanel {
 		btn_cartelera.setBounds(57, 255, 327, 79);
 		panel_menu.add(btn_cartelera);
 
-		ln= new logica_negocio(this);
+		ln= new logica_negocio(this,ARCANE);
 	}
 }

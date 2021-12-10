@@ -19,15 +19,13 @@ public class logica_negocio_panelCine implements configurable {
 	private JLabel[] auxi;
 	
 	public logica_negocio_panelCine(panel_cine pc_,pelicula[] peliculas_) {
-		this.pc= pc_;	
-		this.pcc= new panel_Cartelera();
+		this.pc= pc_;			
 		auxi= new JLabel[10];
 	}
 	public logica_negocio_panelCine(panel_cine pc_,pelicula[] peliculas_, cine ARCANE_) {
 		this.ARCANE=ARCANE_;
 		auxi= new JLabel[10];
-		this.pc= pc_;	
-		this.pcc= new panel_Cartelera();
+		this.pc= pc_;			
 		peliculas= peliculas_;
 		cargarPeliculasComboBox();
 		//pc.panel_detallesFuncion.setVisible(false);	

@@ -43,7 +43,7 @@ public class panel_compra extends JPanel {
 		setLayout(null);
 		
 		JPanel panel_compra = new JPanel();
-		panel_compra.setBounds(32, 23, 379, 416);
+		panel_compra.setBounds(0,0, 1024, 800);
 		add(panel_compra);
 		panel_compra.setLayout(null);
 		
@@ -141,7 +141,7 @@ public class panel_compra extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				panel_compra.setVisible(false);
 				panel_cine= new panel_cine(peliculas,ARCANE);
-				panel_cine.setBounds(10, 11, 439, 468);
+				panel_cine.setBounds(0,0,1024,800);
 				add(panel_cine);
 				
 			}
@@ -164,7 +164,7 @@ public class panel_compra extends JPanel {
 				if(ln_pc.getNumeroAsientos()!=0) {
 					panel_compra.setVisible(false);
 					prueba= new panel_asientos(peliculas,nombrePelicula,tipo,ARCANE,ln_pc.getNumeroAsientos(),ln_pc.getNombresAsientos(),ln_pc);
-					prueba.setBounds(10, 11, 439, 468);
+					prueba.setBounds(0 , 0 ,1024 ,800);
 					add(prueba);
 				}else {
 					ln_pc.print("Ingrese por lo menos un asiento a comprar",2);

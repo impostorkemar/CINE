@@ -38,15 +38,24 @@ public class logica_negocio implements configurable {
 	public logica_negocio() {
 		archivo= new archivos();
 	}
-	public logica_negocio(panel_menu pm_) {
-		this.pm= pm_;		
+	public logica_negocio(panel_menu pm_,cine ARCANE_) {
+		this.pm= pm_;	
+		ARCANE= new cine();
 		peliculas= new pelicula[10];	
 		obras= new pelicula[10];
 		archivo= new archivos();
-		ARCANE= new cine();
+		ARCANE=ARCANE_;
 		crearPeliculas();
-		crearObras();
-		crearCine();
+		if(ARCANE==null){			
+			crearObras();
+			crearCine();
+		}else {
+			salasCine_=ARCANE_.getSalasVisuales();
+			salasTeatro_=ARCANE_.getSalasTeatro();
+			ARCANE= new cine("ARCANE","Quito Estadio Olímpico",salasCine_,salasTeatro_);
+			print("VENGO GORDITO",1);
+		}
+		
 		imprimirSalas(ARCANE);
 	}
 	public void crearPeliculas() {	

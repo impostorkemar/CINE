@@ -9,6 +9,7 @@ import java.util.TimerTask;
 import javax.swing.SwingConstants;
 
 import CONTROLADORES.tiempo;
+import MODELO.cine;
 
 import javax.swing.ImageIcon;
 import java.awt.Color;
@@ -41,7 +42,9 @@ public class panel_inicio extends JPanel {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				panel_menu= new panel_menu();
+				cine ARCANE= null;
+				panel_menu= new panel_menu(ARCANE);
+				
 				panel_menu.setBounds(0, 0, 1024, 800);
 				add(panel_menu);
 			}
