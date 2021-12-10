@@ -19,19 +19,23 @@ public class logica_negocio_panelCompra implements configurable {
 	private pelicula[] peliculas;
 	private String[] asientos;
 	public ArrayList<String> nombresAsientos;
-	private int numeroAdultos=0, numeroNiños=0, numeroTerceraEdad=0, numeroAsientos=0;	
+	private int numeroAdultos=0, numeroNiños=0, numeroTerceraEdad=0, numeroAsientos, asientosIMAX=0;
+	private double  costoAsientoA=0.0, costoAsientoN=0.0, costoAsientoTerceraEdad=0.0;	
+	private double[] costoAsientos;
+	
 	private String nombre_Pelicula_Funcion, tipo;	
 	private DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(); 
 	
 	public logica_negocio_panelCompra(logica_negocio_panelCompra ln_pc, pelicula[] peliculas_,String nombrePelicula_Funcion,
 			String tipo_,cine ARCANE_) {
+		costoAsientos= new double[3];
 		nombresAsientos=new ArrayList<String>();
 		ARCANE=ARCANE_;
 		decimalFormat.setMinimumFractionDigits(2);
 		this.pc=ln_pc.getPc();
 		pc.setVisible(true);
 		this.peliculas=peliculas_;
-		this.tipo=tipo_;
+		this.tipo=tipo_;		
 		nombre_Pelicula_Funcion=nombrePelicula_Funcion;	
 		pc.txt_evento.setText(nombrePelicula_Funcion);
 		cargarHorarios();
@@ -52,6 +56,57 @@ public class logica_negocio_panelCompra implements configurable {
 	
 	public void crearPersona() {
 		persona= new persona(pc.txt_nombre.getText(),"adulto",Long.valueOf(pc.txt_cedula.getText()),Integer.valueOf(pc.txt_telefono.getText()),pc.txt_direccion.getText());
+	}
+	public double[] verificarIMAX() {
+		double costoBoleto=0.0;		
+		if(tipo.equals("cine")) {	
+			costoBoleto=4.5;
+			if(pc.chck_adultos.isSelected()) {
+				asientosIMAX+=numeroAdultos;
+				costoAsientoA=costoBoleto*0.35+costoBoleto;
+			}else {
+				costoAsientoA=costoBoleto;
+			}
+			if(pc.chck_niños.isSelected()) {
+				asientosIMAX+=numeroNiños;
+				costoAsientoN=costoBoleto*0.35+costoBoleto;
+			}else {
+				costoAsientoN=costoBoleto;
+			}
+			if(pc.chck_tercerEdad.isSelected()) {
+				asientosIMAX+=numeroTerceraEdad;
+				costoAsientoTerceraEdad=costoBoleto*0.35+costoBoleto;
+			}else {
+				costoAsientoTerceraEdad=costoBoleto;
+			}
+		}else if(tipo.equals("teatro")){
+			costoBoleto=12.5;
+			if(pc.chck_adultos.isSelected()) {
+				asientosIMAX+=numeroAdultos;
+				costoAsientoA=costoBoleto*0.35+costoBoleto;
+			}else {
+				costoAsientoA=costoBoleto;
+			}
+			if(pc.chck_niños.isSelected()) {
+				asientosIMAX+=numeroNiños;
+				costoAsientoN=costoBoleto*0.35+costoBoleto;
+			}else {
+				costoAsientoN=costoBoleto;
+			}
+			if(pc.chck_tercerEdad.isSelected()) {
+				asientosIMAX+=numeroTerceraEdad;
+				costoAsientoTerceraEdad=costoBoleto*0.35+costoBoleto;
+			}else {
+				costoAsientoTerceraEdad=costoBoleto;
+			}
+		}
+		double [] costoAsientosAux= new double[3];
+		costoAsientosAux[0]=costoAsientoA;
+		costoAsientosAux[1]=costoAsientoN;
+		costoAsientosAux[2]=costoAsientoTerceraEdad;
+		
+		return costoAsientosAux;
+		
 	}
 	public void contarAsientos() {
 		
@@ -110,6 +165,7 @@ public class logica_negocio_panelCompra implements configurable {
 			numeroAsientos= Integer.valueOf(numeroTerceraEdad+numeroAdultos);
 		}
 		//print("adulto: "+numeroAdultos+" niños: "+numeroNiños+"numeroTerceraEdad: "+numeroTerceraEdad+"censura:"+comprobarCensura(),1);
+		costoAsientos=verificarIMAX();
 		
 	}
 	
@@ -362,7 +418,18 @@ public class logica_negocio_panelCompra implements configurable {
 	public void setNumeroTerceraEdad(int numeroTerceraEdad) {
 		this.numeroTerceraEdad = numeroTerceraEdad;
 	}
-	
+	public double[] getCostoAsientos() {
+		return costoAsientos;
+	}
+	public void setCostoAsientos(double[] costoAsientos) {
+		this.costoAsientos = costoAsientos;
+	}
+	public int getAsientosIMAX() {
+		return asientosIMAX;
+	}
+	public void setAsientosIMAX(int asientosIMAX) {
+		this.asientosIMAX = asientosIMAX;
+	}
 	
 	
 	

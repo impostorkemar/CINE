@@ -8,12 +8,11 @@ import javax.swing.JButton;
 
 import MODELO.cine;
 import VISTA.panel_asientos;
-import VISTA.prueba;
+import VISTA.panel_asientos;
 
-public class logica_negocio_panelAsientos {
-	private panel_asientos pa;
+public class logica_negocio_panelAsientos {	
 	private logica_negocio_panelCompra ln_pc;
-	private prueba p;
+	private panel_asientos pA;
 	private String[] nombresBotones={"asiento0","asiento1","asiento2","asiento0_0","asiento0.1"};
 	private int numeroAdultos=0, numeroNiños=0, numeroTerceraEdad=0, numeroAsientos=0;
 	private ArrayList<String> nombresI;
@@ -21,15 +20,14 @@ public class logica_negocio_panelAsientos {
 	private DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getCurrencyInstance();
 	private double iva=0.12, costoAsiento=0.0, precioBoletoCine=4.5,subtotal=0, total=0,precioBoletoTeatro=12.5;
 	private String tipo;
+	private JButton[] nBotonesI;
+	private JButton[][] nBotonesN;
 	
-	public logica_negocio_panelAsientos(panel_asientos pa_) {
-		decimalFormat.setMinimumFractionDigits(2);
-		this.pa=pa_;
-		botonesOcupados(nombresBotones);
-		
-	}
-	public logica_negocio_panelAsientos(prueba pa_,ArrayList<String> nombres_,String tipo_,int numeroAdultos, 
+	
+	public logica_negocio_panelAsientos(panel_asientos pa_,ArrayList<String> nombres_,String tipo_,int numeroAdultos, 
 			int numeroNiños,int numeroTerceraEdad, cine ARCANE, logica_negocio_panelCompra ln_pc_) {
+		this.nBotonesI=pa_.botones;
+		this.nBotonesN=pa_.botones2;
 		this.ln_pc=ln_pc_;
 		this.numeroAdultos=numeroAdultos;
 		this.numeroNiños=numeroNiños;
@@ -37,12 +35,24 @@ public class logica_negocio_panelAsientos {
 		this.tipo=tipo_;
 		nombresI= new ArrayList<String>();
 		nombresN= new ArrayList<String>();
-		this.p=pa_;
+		this.pA=pa_;
 		decimalFormat.setMinimumFractionDigits(2);
 	}
-	public void botonesOcupados(String [] nombres) {
-		for(int i=0;i<nombres.length;i++) {
-			cambiarEditable(pa.asiento0, nombres[i]);
+	public void botonesOcupadosI(String [] nAux) {
+		for(int i=0;i<nAux.length;i++) {
+			cambiarEditable(nAux[i],nBotonesI[i]);
+		}
+	}
+	public void botonesOcupadosN(String [] nAux) {
+		for(int i=0;i<10;i++) {
+			for(int j=0;j<5;j++) {
+				cambiarEditable(nAux[i],nBotonesN[i][j]);
+			}			
+		}
+	}
+	public void cambiarEditable(String  nAux, JButton boton) {
+		if(boton.getText().equals(nAux)) {			
+			boton.setEnabled(false);
 		}
 	}
 	public boolean botonReservado(String nombre) {
@@ -54,12 +64,7 @@ public class logica_negocio_panelAsientos {
 		}
 		return flag;		
 	}
-	public void cambiarEditable(JButton boton,String nombre) {
-		System.out.println(boton.getText().toString());
-		if(boton.getText().toString().equals(nombre)) {
-			boton.setEnabled(false);
-		}
-	}
+	
 	public void calcularCosto() {
 		calcularSubtotal();	
 		calcularIva();
@@ -67,24 +72,30 @@ public class logica_negocio_panelAsientos {
 	}
 	public void calcularSubtotal() {
 		subtotal=0.0;
+		double[] aux= new double[3];
+		aux=ln_pc.getCostoAsientos();
 		if(tipo.equals("cine")) {			
-			subtotal=precioBoletoCine*numeroAdultos+((precioBoletoCine/2)*numeroNiños)+((precioBoletoCine/2)*numeroTerceraEdad);
-			p.txt_subtotal.setText(String.valueOf(decimalFormat.format(subtotal)));
+			subtotal=aux[0]*numeroAdultos+((aux[1]/2)*numeroNiños)+((aux[2]/2)*numeroTerceraEdad);
+			pA.txt_subtotal.setText(String.valueOf(decimalFormat.format(subtotal)));
 		}			
 		else if(tipo.equals("teatro")) {
-			subtotal=precioBoletoTeatro*numeroAdultos+((precioBoletoTeatro/2)*numeroNiños)+((precioBoletoTeatro/2)*numeroTerceraEdad);
-			p.txt_subtotal.setText(String.valueOf(decimalFormat.format(subtotal)));
+			subtotal=aux[0]*numeroAdultos+((aux[1]/2)*numeroNiños)+((aux[2]/2)*numeroTerceraEdad);
+			pA.txt_subtotal.setText(String.valueOf(decimalFormat.format(subtotal)));
 		}
+		System.out.println("costoBoleto A:"+aux[0]*numeroAdultos);
+		System.out.println("costoBoleto N:"+(aux[1]/2)*numeroAdultos);		
+		System.out.println("costoBoleto TE:"+(aux[2]/2)*numeroAdultos);
+		
 	}
 	public void calcularTotal() {
 		total=0.0;
 		total=subtotal+iva;
-		p.txt_total.setText(String.valueOf(decimalFormat.format(total)));		
+		pA.txt_total.setText(String.valueOf(decimalFormat.format(total)));		
 	}
 	public void calcularIva() {
 		iva=0.12;
 		iva=subtotal*iva;
-		p.txt_iva.setText(String.valueOf(decimalFormat.format(iva)));
+		pA.txt_iva.setText(String.valueOf(decimalFormat.format(iva)));
 	}
 	public void reservarAsientosSeleccionados(){
 		ArrayList<String> auxA= new ArrayList<String>();
