@@ -55,7 +55,14 @@ public class logica_negocio_panelCompra implements configurable {
 	}
 	
 	public void crearPersona() {
-		persona= new persona(pc.txt_nombre.getText(),"adulto",Long.valueOf(pc.txt_cedula.getText()),Integer.valueOf(pc.txt_telefono.getText()),pc.txt_direccion.getText());
+		if (!pc.txt_cedula.getText().equals("") && !pc.txt_nombre.getText().equals("") &&
+				!pc.txt_telefono.getText().equals("") && !pc.txt_direccion.getText().equals("")) {
+			persona= new persona(pc.txt_nombre.getText(),"adulto",Long.valueOf(pc.txt_cedula.getText()),Integer.valueOf(pc.txt_telefono.getText()),pc.txt_direccion.getText());
+				
+		}
+		else
+			persona= new persona();
+	
 	}
 	public double[] verificarIMAX() {
 		double costoBoleto=0.0;		
@@ -462,8 +469,44 @@ public class logica_negocio_panelCompra implements configurable {
 	public void setNombre_Pelicula_Funcion(String nombre_Pelicula_Funcion) {
 		this.nombre_Pelicula_Funcion = nombre_Pelicula_Funcion;
 	}
-	
-	
+	public void validarCampos() {
+		if(persona.validarCedula(pc.txt_cedula.getText()))
+			pc.lbl_cedula.setText("");
+		else
+			pc.lbl_cedula.setText("ERROR");
+		if(persona.validarNombre(pc.txt_nombre.getText()))
+			pc.lbl_nombre.setText("");
+		else
+			pc.lbl_nombre.setText("ERROR");
+		if(persona.validarCelular(pc.txt_telefono.getText()))
+			pc.lbl_telefono.setText("");
+		else
+			pc.lbl_telefono.setText("ERROR");
+		if(persona.validarDireccion(pc.txt_direccion.getText()))
+			pc.lbl_direccion.setText("");
+		else
+			pc.lbl_direccion.setText("ERROR");
+		
+		
+	}
+	public boolean validarAsientos() {		
+		boolean flag= false;
+		if(isNumeric(pc.txt_adultos.getText())&&isNumeric(pc.txt_niños.getText())&&isNumeric(pc.txt_TerceraEdad.getText())) {
+			pc.lbl_validarAsientos.setText("");
+			return true;
+		}else {
+			pc.lbl_validarAsientos.setText("ERROR");
+		}
+		return flag;
+	}
+	private static boolean isNumeric(String cadena){
+		try {
+			Integer.parseInt(cadena);
+			return true;
+		} catch (NumberFormatException nfe){
+			return false;
+		}
+	}
 	
 	
 }

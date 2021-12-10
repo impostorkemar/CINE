@@ -10,6 +10,7 @@ import javax.swing.JButton;
 
 import MODELO.cine;
 import VISTA.panel_asientos;
+import patron_generico_g2.archivos;
 import patron_generico_g2.configurable;
 import VISTA.panel_asientos;
 
@@ -27,6 +28,8 @@ public class logica_negocio_panelAsientos implements configurable{
 	private JButton[][] nBotonesN;
 	private cine ARCANE;
 	private String horario, nombrePelicula;
+	private archivos archivo;
+	private String pathname="src/ARCHIVOS/tickets.txt";
 	
 	
 	public logica_negocio_panelAsientos(panel_asientos pa_,ArrayList<String> nombres_,String tipo_,int numeroAdultos, 
@@ -45,6 +48,7 @@ public class logica_negocio_panelAsientos implements configurable{
 		decimalFormat.setMinimumFractionDigits(2);
 		this.horario=horario_;
 		this.nombrePelicula=nombrePelicula_;
+		this.archivo= new archivos();
 	}
 	public void BuscarDatosAsientos() {
 		ArrayList<String> asientosLlenosI= new ArrayList<String>();
@@ -185,6 +189,16 @@ public class logica_negocio_panelAsientos implements configurable{
 		ln_pc.print("\nTICKET\n\t"+date+ "\nSALA: "+ln_pc.getTipo()+  "\nHorario: "+ln_pc.getSalaH() + "\nPelicula\t"+nombrePelicula+
 		"\nPersona: "+ln_pc.getPersona().getDatos().getAtributoT1()+ "\n\nAsientos: \n\nIMAX:\n"+nombresI.toString()+"\nNORMALES\n"+
 				nombresN.toString()+"\n",2);
+		imprimirTickerArchivo(date);
+	}
+	public void imprimirTickerArchivo(Date date) {
+		String texto="";
+		texto="\nTICKET\n\t"+date+ "\nSALA: "+ln_pc.getTipo()+  "\nHorario: "+ln_pc.getSalaH() + "\nPelicula\t"+nombrePelicula+
+		"\nPersona: "+ln_pc.getPersona().getDatos().getAtributoT1()+ "\n\nAsientos: \n\nIMAX:\n"+nombresI.toString()+"\nNORMALES\n"+
+				nombresN.toString()+"\n";
+		
+		archivo.escribir(pathname, texto,false);
+		
 	}
 	public ArrayList<String> getNombresI() {
 		return nombresI;

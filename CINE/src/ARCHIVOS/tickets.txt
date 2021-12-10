@@ -1,0 +1,30 @@
+
+TICKET
+	Fri Dec 10 02:28:51 ECT 2021
+SALA: cine
+Horario: sala0_horario0
+Pelicula	La sirenita
+Persona: Jefferson Cajas
+
+Asientos: 
+
+IMAX:
+[]
+NORMALES
+[asiento0_2, asiento0_3]
+
+
+TICKET
+	Fri Dec 10 02:30:01 ECT 2021
+SALA: cine
+Horario: sala0_horario0
+Pelicula	La sirenita
+Persona: Jefferson Cajas
+
+Asientos: 
+
+IMAX:
+[]
+NORMALES
+[asiento0_1, asiento1_1]
+

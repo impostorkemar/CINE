@@ -15,6 +15,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JCheckBox;
+import java.awt.Color;
+import java.awt.Font;
 
 public class panel_compra extends JPanel {
 	private JPanel panel_cine;
@@ -33,6 +35,11 @@ public class panel_compra extends JPanel {
 	public JCheckBox chck_niños;
 	
 	private logica_negocio_panelCompra ln_pc;
+	public JLabel lbl_direccion;
+	public JLabel lbl_telefono;
+	public JLabel lbl_nombre;
+	public JLabel lbl_cedula;
+	public JLabel lbl_validarAsientos;
 	
 	
 	
@@ -112,24 +119,26 @@ public class panel_compra extends JPanel {
 		
 		JButton btn_confirmar = new JButton("CONFIRMAR");
 		btn_confirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(ln_pc.comprobarCensura()) {
+			public void actionPerformed(ActionEvent e) {				
+				if(ln_pc.comprobarCensura()) {					
 					ln_pc.crearPersona();
-					ln_pc.contarAsientos();
-					if(ln_pc.getNumeroAsientos()!=0) {
+					ln_pc.contarAsientos();										
+					if(ln_pc.getNumeroAsientos()!=0) {						
 						ln_pc.print("Datos registrados",2);	
 					}else {
 						ln_pc.print("Ingrese por lo menos un asiento a comprar",2);
 					}
 				}else if(!ln_pc.comprobarCensura())	{
 					ln_pc.crearPersona();
-					ln_pc.contarAsientos();										
-					if(ln_pc.getNumeroAsientos()!=0) {
+					ln_pc.validarAsientos();	
+					ln_pc.contarAsientos();	
+					if(ln_pc.getNumeroAsientos()!=0) {						
 						ln_pc.print("Datos registrados",2);
 					}else {
 						ln_pc.print("Ingrese por lo menos un asiento a comprar",2);
 					}
 				}
+				ln_pc.validarCampos();
 			}
 				
 		});
@@ -199,6 +208,32 @@ public class panel_compra extends JPanel {
 		JLabel lbl_IMAX = new JLabel("IMAX");
 		lbl_IMAX.setBounds(285, 212, 49, 14);
 		panel_compra.add(lbl_IMAX);
+		
+		lbl_cedula = new JLabel("");
+		lbl_cedula.setForeground(Color.RED);
+		lbl_cedula.setBounds(388, 14, 49, 14);
+		panel_compra.add(lbl_cedula);
+		
+		lbl_nombre = new JLabel("");
+		lbl_nombre.setForeground(Color.RED);
+		lbl_nombre.setBounds(388, 39, 49, 14);
+		panel_compra.add(lbl_nombre);
+		
+		lbl_telefono = new JLabel("");
+		lbl_telefono.setForeground(Color.RED);
+		lbl_telefono.setBounds(388, 71, 49, 14);
+		panel_compra.add(lbl_telefono);
+		
+		lbl_direccion = new JLabel("");
+		lbl_direccion.setForeground(Color.RED);
+		lbl_direccion.setBounds(388, 104, 49, 14);
+		panel_compra.add(lbl_direccion);
+		
+		lbl_validarAsientos = new JLabel("");
+		lbl_validarAsientos.setForeground(Color.RED);
+		lbl_validarAsientos.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lbl_validarAsientos.setBounds(329, 242, 74, 42);
+		panel_compra.add(lbl_validarAsientos);
 		ln_pc=new logica_negocio_panelCompra(this, peliculas,nombrePelicula,tipo,ARCANE);
 		
 		if(!ln_pc.comprobarCensura()) {

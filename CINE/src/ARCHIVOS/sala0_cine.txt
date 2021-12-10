@@ -12,10 +12,10 @@ sala0_horario0 [funcion [La sirenita , fantasía ,false , Pelicula infantil de c
 	asiento7,IMAX,0,7, ocupado=false
 	asiento8,IMAX,0,8, ocupado=false
 	asiento9,IMAX,0,9, ocupado=false
-	asiento0_0,NORMALES,0,0, ocupado=true
+	asiento0_0,NORMALES,0,0, ocupado=false
 	asiento0_1,NORMALES,0,1, ocupado=true
-	asiento0_2,NORMALES,0,2, ocupado=false
-	asiento0_3,NORMALES,0,3, ocupado=false
+	asiento0_2,NORMALES,0,2, ocupado=true
+	asiento0_3,NORMALES,0,3, ocupado=true
 	asiento0_4,NORMALES,0,4, ocupado=false
 	asiento0_5,NORMALES,0,5, ocupado=false
 	asiento0_6,NORMALES,0,6, ocupado=false
@@ -23,7 +23,7 @@ sala0_horario0 [funcion [La sirenita , fantasía ,false , Pelicula infantil de c
 	asiento0_8,NORMALES,0,8, ocupado=false
 	asiento0_9,NORMALES,0,9, ocupado=false
 	asiento1_0,NORMALES,1,0, ocupado=false
-	asiento1_1,NORMALES,1,1, ocupado=false
+	asiento1_1,NORMALES,1,1, ocupado=true
 	asiento1_2,NORMALES,1,2, ocupado=false
 	asiento1_3,NORMALES,1,3, ocupado=false
 	asiento1_4,NORMALES,1,4, ocupado=false

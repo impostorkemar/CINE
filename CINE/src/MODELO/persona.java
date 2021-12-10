@@ -24,6 +24,21 @@ public class persona {
 		public String toString() {
 			return "persona [datos=" + datos + "]";
 		}
-		
+		public boolean validarNombre(String nombre){
+			//Validacion del nombre
+			return nombre.matches("^([A-Z]{1}[a-záéíóú]+[ ]?){2,4}$");
+		}
+		public boolean validarCedula(String cedula) {
+			return cedula.matches("^(0|1)[0-9]{9}$");
+		}
+		public boolean validarTelefCasa(String telfcasa) {
+			return telfcasa.matches("^[(][0][2-7]{1}[)][-][0-9]{4}[-][0-9]{3}$");
+		}
+		public boolean validarCelular(String celular) {
+			return celular.matches("^[0][1-9]{1}[0-9]{8}$");
+		}
+		public boolean validarDireccion(String direccion) {
+			return direccion.matches("^[0-9A-Za-z:;.,-_áéíóúÁÉÍÓÚ/ ]+$");
+		}
 		
 }
