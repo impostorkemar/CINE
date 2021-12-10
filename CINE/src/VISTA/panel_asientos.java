@@ -29,12 +29,14 @@ public class panel_asientos extends JPanel {
 	public JTextField txt_total;
 	private cine ARCANE;
 	private panel_menu panel_menu;
+	
 	//private ArrayList<String> nombres;
 	/**
 	 * Create the panel.
 	 */
 	public panel_asientos(pelicula[] peliculas,String nombrePelicula,String tipo,cine ARCANE_,int nAsientos_, ArrayList<String> nombres_,
-			logica_negocio_panelCompra ln_pc_) {
+			logica_negocio_panelCompra ln_pc_,String nombreSala) {
+		this.ln_pc=ln_pc_;
 		this.ARCANE=ARCANE_;
 		this.nAsientos=nAsientos_;
 		this.nAsientosI=ln_pc_.getAsientosIMAX();
@@ -51,15 +53,21 @@ public class panel_asientos extends JPanel {
 		
 		JButton btn_confirmar = new JButton("confirmar");
 		btn_confirmar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ln_pA.calcularCosto();
+			public void actionPerformed(ActionEvent e) {				
 				ln_pA.reservarAsientosSeleccionados();
-				btn_confirmar.setEnabled(false);
-				ln_pA.impirmirTicket();
-				panel_asientos.setVisible(false);
-				panel_menu= new panel_menu(ARCANE);
-				panel_menu.setBounds(0, 0, 1024, 800);
-				add(panel_menu);
+				if(nAsientos==ln_pA.getNombresN().size()+ln_pA.getNombresI().size()) {
+					ln_pA.calcularCosto();
+					btn_confirmar.setEnabled(false);
+					
+					ln_pA.imprimirTicket();
+					panel_asientos.setVisible(false);
+					panel_menu= new panel_menu(ARCANE);
+					panel_menu.setBounds(0, 0, 1024, 800);
+					add(panel_menu);
+				}else {
+					ln_pA.print("ESCOJA ASIENTOS SOLICITADOS\nAsientos solicitados:\t"+nAsientos,2);
+				}
+				
 			}
 		});
 		btn_confirmar.setBounds(230, 364, 94, 23);
@@ -104,6 +112,15 @@ public class panel_asientos extends JPanel {
 		JLabel lblNios_1_1 = new JLabel("IVA");
 		lblNios_1_1.setBounds(24, 368, 79, 14);
 		panel_asientos.add(lblNios_1_1);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ln_pA.BuscarDatosAsientos();
+			}
+		});
+		btnNewButton.setBounds(264, 330, 89, 23);
+		panel_asientos.add(btnNewButton);
 		
 		//BOTONES AUTOGENERADOS IMAX
 		int ancho=20, alto=20, posX=30, posY=30, i=0;
@@ -182,9 +199,11 @@ public class panel_asientos extends JPanel {
         	}
         	
         }
+        System.out.println(nombreSala);
         
 		ln_pA= new logica_negocio_panelAsientos(this, nombres_,tipo,ln_pc_.getNumeroAdultos(),ln_pc_.getNumeroNiños(),
-				ln_pc_.getNumeroTerceraEdad(),ARCANE,ln_pc_);
+				ln_pc_.getNumeroTerceraEdad(),ARCANE,ln_pc_,nombreSala);
+		
 		//crearBotones(this);
 		
 	}
@@ -249,9 +268,9 @@ public class panel_asientos extends JPanel {
 		}
 	}
 	public void imprimirI_N() {
-		System.out.println("AsientoosCliqueadosI: "+ln_pA.getNombresI().size()+" AsientosRecibidos"+nAsientos);
-		System.out.println("AsientoosCliqueadosN: "+ln_pA.getNombresN().size()+" AsientosRecibidos"+nAsientos);
-		System.out.println("\nBOTONES ALMACENADOS IMAX\n");
+		//System.out.println("AsientoosCliqueadosI: "+ln_pA.getNombresI().size()+" AsientosRecibidos"+nAsientos);
+		//System.out.println("AsientoosCliqueadosN: "+ln_pA.getNombresN().size()+" AsientosRecibidos"+nAsientos);
+		//System.out.println("\nBOTONES ALMACENADOS IMAX\n");
 		for(String auxNombre:ln_pA.getNombresI()) {
 			System.out.println(auxNombre);
 		}
