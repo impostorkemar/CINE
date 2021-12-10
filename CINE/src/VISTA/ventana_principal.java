@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 public class ventana_principal extends JFrame {
 
 	private JPanel contentPane;
+	public static int nTickets=0;
 
 	/**
 	 * Launch the application.

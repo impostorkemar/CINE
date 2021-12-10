@@ -163,6 +163,7 @@ public class panel_compra extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if(ln_pc.getNumeroAsientos()!=0) {
 					panel_compra.setVisible(false);
+					ln_pc.cargarHorario();
 					prueba= new panel_asientos(peliculas,nombrePelicula,tipo,ARCANE,ln_pc.getNumeroAsientos(),ln_pc.getNombresAsientos(),ln_pc, ln_pc.getSalaH());
 					prueba.setBounds(0 , 0 ,1024 ,800);
 					add(prueba);

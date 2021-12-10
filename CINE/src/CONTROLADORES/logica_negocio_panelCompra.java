@@ -22,7 +22,7 @@ public class logica_negocio_panelCompra implements configurable {
 	private int numeroAdultos=0, numeroNiños=0, numeroTerceraEdad=0, numeroAsientos, asientosIMAX=0;
 	private double  costoAsientoA=0.0, costoAsientoN=0.0, costoAsientoTerceraEdad=0.0;	
 	private double[] costoAsientos;	
-	private String nombre_Pelicula_Funcion, tipo, salaH;	
+	private String nombre_Pelicula_Funcion, tipo, nombreHorario;	
 	private DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getCurrencyInstance(); 
 	
 	public logica_negocio_panelCompra(logica_negocio_panelCompra ln_pc, pelicula[] peliculas_,String nombrePelicula_Funcion,
@@ -242,7 +242,7 @@ public class logica_negocio_panelCompra implements configurable {
 									ARCANE.getSalasVisuales()[g].getHorarios()[j].getDatos().getAtributoT1().equals(pc.combobox_horario.getSelectedItem().toString())&&
 									ARCANE.getSalasVisuales()[g].getHorarios()[j].getAsientosIMAX()[k].getDatos().getAtributoT1().equals(nombreAsiento)) {
 								//print(auxVisuales[g].getNombre()+"\t"+auxVisuales[g].getHorarios()[j].getAsientosIMAX()[k].toString(),1);
-								salaH= pc.combobox_horario.getSelectedItem().toString();
+								nombreHorario= ARCANE.getSalasVisuales()[g].getHorarios()[j].getDatos().getAtributoT1();
 								auxVisuales[g].getHorarios()[j].getAsientosIMAX()[k].setOcupado(true);
 							}
 						}
@@ -275,7 +275,7 @@ public class logica_negocio_panelCompra implements configurable {
 										ARCANE.getSalasVisuales()[g].getHorarios()[j].getAsientosNormales()[k][x].getDatos().getAtributoT1().equals(nombreAsiento)) {
 									//print(auxVisuales[g].getNombre()+"\t"+auxVisuales[g].getHorarios()[j].getAsientosIMAX()[k].toString(),1);
 									auxVisuales[g].getHorarios()[j].getAsientosNormales()[k][x].setOcupado(true);
-									salaH= pc.combobox_horario.getSelectedItem().toString();
+									nombreHorario= ARCANE.getSalasVisuales()[g].getHorarios()[j].getDatos().getAtributoT1();
 								}
 							}
 							
@@ -309,7 +309,7 @@ public class logica_negocio_panelCompra implements configurable {
 									ARCANE.getSalasTeatro()[g].getHorarios()[j].getAsientosIMAX()[k].getDatos().getAtributoT1().equals(nombreAsiento)) {
 								//print(auxObras[g].getNombre()+"\t"+auxObras[g].getHorarios()[j].getAsientosIMAX()[k].toString(),1);
 								auxObras[g].getHorarios()[j].getAsientosIMAX()[k].setOcupado(true);
-								salaH= pc.combobox_horario.getSelectedItem().toString();
+								nombreHorario= ARCANE.getSalasTeatro()[g].getHorarios()[j].getDatos().getAtributoT1();
 							}
 						}
 					}
@@ -340,7 +340,7 @@ public class logica_negocio_panelCompra implements configurable {
 										ARCANE.getSalasTeatro()[g].getHorarios()[j].getAsientosNormales()[k][x].getDatos().getAtributoT1().equals(nombreAsiento)) {
 									//print(auxObras[g].getNombre()+"\t"+auxObras[g].getHorarios()[j].getAsientosIMAX()[k].toString(),1);
 									auxObras[g].getHorarios()[j].getAsientosNormales()[k][x].setOcupado(true);
-									salaH= pc.combobox_horario.getSelectedItem().toString();
+									nombreHorario= ARCANE.getSalasTeatro()[g].getHorarios()[j].getDatos().getAtributoT1();
 								}
 							}
 						}
@@ -365,7 +365,9 @@ public class logica_negocio_panelCompra implements configurable {
 			reservarAsiento(auxNombreAsiento,tipo);
 		}*/
 	}
-	
+	public void cargarHorario() {
+		nombreHorario= pc.combobox_horario.getSelectedItem().toString();
+	}
 
 	public cine getARCANE() {
 		return ARCANE;
@@ -441,10 +443,10 @@ public class logica_negocio_panelCompra implements configurable {
 		this.persona = persona;
 	}
 	public String getSalaH() {
-		return salaH;
+		return nombreHorario;
 	}
 	public void setSalaH(String salaH) {
-		this.salaH = salaH;
+		this.nombreHorario = salaH;
 	}
 	public String getTipo() {
 		return tipo;

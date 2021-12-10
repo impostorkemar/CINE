@@ -12,8 +12,8 @@ sala0_horario0 [funcion [La sirenita , fantasía ,false , Pelicula infantil de c
 	asiento7,IMAX,0,7, ocupado=false
 	asiento8,IMAX,0,8, ocupado=false
 	asiento9,IMAX,0,9, ocupado=false
-	asiento0_0,NORMALES,0,0, ocupado=false
-	asiento0_1,NORMALES,0,1, ocupado=false
+	asiento0_0,NORMALES,0,0, ocupado=true
+	asiento0_1,NORMALES,0,1, ocupado=true
 	asiento0_2,NORMALES,0,2, ocupado=false
 	asiento0_3,NORMALES,0,3, ocupado=false
 	asiento0_4,NORMALES,0,4, ocupado=false

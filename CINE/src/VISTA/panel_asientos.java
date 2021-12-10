@@ -113,15 +113,6 @@ public class panel_asientos extends JPanel {
 		lblNios_1_1.setBounds(24, 368, 79, 14);
 		panel_asientos.add(lblNios_1_1);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ln_pA.BuscarDatosAsientos();
-			}
-		});
-		btnNewButton.setBounds(264, 330, 89, 23);
-		panel_asientos.add(btnNewButton);
-		
 		//BOTONES AUTOGENERADOS IMAX
 		int ancho=20, alto=20, posX=30, posY=30, i=0;
 		JLabel etiqueta[]= new JLabel[10];
@@ -199,11 +190,11 @@ public class panel_asientos extends JPanel {
         	}
         	
         }
-        System.out.println(nombreSala);
+        
         
 		ln_pA= new logica_negocio_panelAsientos(this, nombres_,tipo,ln_pc_.getNumeroAdultos(),ln_pc_.getNumeroNiños(),
-				ln_pc_.getNumeroTerceraEdad(),ARCANE,ln_pc_,nombreSala);
-		
+				ln_pc_.getNumeroTerceraEdad(),ARCANE,ln_pc_,nombreSala,nombrePelicula);
+		ln_pA.BuscarDatosAsientos();
 		//crearBotones(this);
 		
 	}

@@ -26,11 +26,11 @@ public class logica_negocio_panelAsientos implements configurable{
 	private JButton[] nBotonesI;
 	private JButton[][] nBotonesN;
 	private cine ARCANE;
-	private String horario;
+	private String horario, nombrePelicula;
 	
 	
 	public logica_negocio_panelAsientos(panel_asientos pa_,ArrayList<String> nombres_,String tipo_,int numeroAdultos, 
-			int numeroNiños,int numeroTerceraEdad, cine ARCANE, logica_negocio_panelCompra ln_pc_,String horario_) {
+			int numeroNiños,int numeroTerceraEdad, cine ARCANE, logica_negocio_panelCompra ln_pc_,String horario_,String nombrePelicula_) {
 		this.ARCANE=ARCANE;
 		this.nBotonesI=pa_.botones;
 		this.nBotonesN=pa_.botones2;
@@ -44,17 +44,18 @@ public class logica_negocio_panelAsientos implements configurable{
 		this.pA=pa_;
 		decimalFormat.setMinimumFractionDigits(2);
 		this.horario=horario_;
+		this.nombrePelicula=nombrePelicula_;
 	}
 	public void BuscarDatosAsientos() {
 		ArrayList<String> asientosLlenosI= new ArrayList<String>();
 		ArrayList<String> asientosLlenosN= new ArrayList<String>();
-		System.out.println("SALA A COMPARAR: "+horario);
+		
 		if(tipo.equals("cine")){			
 			for(int g=0;g<10;g++) {			
 				for(int j=0;j<2;j++) {
 					for(int k=0;k<10;k++) {
-						if(ARCANE.getSalasVisuales()[g].getHorarios()[j].getAsientosIMAX()[k].isOcupado() ==true) {
-							System.out.println("NHorario: "+ARCANE.getSalasVisuales()[g].getHorarios()[j].getDatos().getAtributoT1());
+						if(ARCANE.getSalasVisuales()[g].getHorarios()[j].getDatos().getAtributoT1().equals(horario)&&
+								ARCANE.getSalasVisuales()[g].getHorarios()[j].getAsientosIMAX()[k].isOcupado() ==true) {							
 							asientosLlenosI.add(ARCANE.getSalasVisuales()[g].getHorarios()[j].getAsientosIMAX()[k].getDatos().getAtributoT1());
 						}
 					}
@@ -64,8 +65,8 @@ public class logica_negocio_panelAsientos implements configurable{
 				for(int j=0;j<2;j++) {
 					for(int k=0;k<5;k++) {
 						for(int x=0; x<10;x++) {
-							if(	ARCANE.getSalasVisuales()[g].getHorarios()[j].getAsientosNormales()[k][x].isOcupado()==true) {
-								System.out.println("NHorario: "+ARCANE.getSalasVisuales()[g].getHorarios()[j].getDatos().getAtributoT1());
+							if(	ARCANE.getSalasVisuales()[g].getHorarios()[j].getDatos().getAtributoT1().equals(horario)&&
+									ARCANE.getSalasVisuales()[g].getHorarios()[j].getAsientosNormales()[k][x].isOcupado()==true) {								
 								asientosLlenosN.add(ARCANE.getSalasVisuales()[g].getHorarios()[j].getAsientosNormales()[k][x].getDatos().getAtributoT1());
 							}
 						}
@@ -76,8 +77,7 @@ public class logica_negocio_panelAsientos implements configurable{
 			for(int g=0;g<10;g++) {			
 				for(int j=0;j<2;j++) {
 					for(int k=0;k<10;k++) {
-						if(ln_pc.getNombre_Pelicula_Funcion().equals(ARCANE.getSalasTeatro()[g].getHorarios()[j].getPelicula().getDatos().getAtributoT1())&&
-								ARCANE.getSalasTeatro()[g].getHorarios()[j].getDatos().getAtributoT1().equals(ln_pc.getSalaH())&&
+						if(	ARCANE.getSalasTeatro()[g].getHorarios()[j].getDatos().getAtributoT1().equals(ln_pc.getSalaH())&&
 								ARCANE.getSalasTeatro()[g].getHorarios()[j].getAsientosIMAX()[k].isOcupado() ==true) {
 							asientosLlenosI.add(ARCANE.getSalasTeatro()[g].getHorarios()[j].getAsientosIMAX()[k].getDatos().getAtributoT1());
 						}
@@ -88,8 +88,7 @@ public class logica_negocio_panelAsientos implements configurable{
 				for(int j=0;j<2;j++) {
 					for(int k=0;k<5;k++) {
 						for(int x=0; x<10;x++) {
-							if(ln_pc.getNombre_Pelicula_Funcion().equals(ARCANE.getSalasTeatro()[g].getHorarios()[j].getPelicula().getDatos().getAtributoT1())&&
-									ARCANE.getSalasTeatro()[g].getHorarios()[j].getDatos().getAtributoT1().equals(ln_pc.getSalaH())&&
+							if(ARCANE.getSalasTeatro()[g].getHorarios()[j].getDatos().getAtributoT1().equals(ln_pc.getSalaH())&&
 									ARCANE.getSalasTeatro()[g].getHorarios()[j].getAsientosNormales()[k][x].isOcupado()==true) {
 								asientosLlenosN.add(ARCANE.getSalasTeatro()[g].getHorarios()[j].getAsientosNormales()[k][x].getDatos().getAtributoT1());
 							}
@@ -98,13 +97,13 @@ public class logica_negocio_panelAsientos implements configurable{
 				}
 			}
 		}
-		print("Asientos precargados",1);
+		//print("Asientos precargados",1);
 		for(String auxAsiento :asientosLlenosI) {
-			print(auxAsiento.toString(),1);
+			//print(auxAsiento.toString(),1);
 			botonesOcupadosI(auxAsiento);
 		}
 		for(String auxAsiento1 :asientosLlenosN) {
-			print(auxAsiento1.toString(),1);
+			//print(auxAsiento1.toString(),1);
 			botonesOcupadosN(auxAsiento1);
 		}
 			
@@ -177,14 +176,14 @@ public class logica_negocio_panelAsientos implements configurable{
 		auxA.addAll(getNombresI());
 		auxA.addAll(getNombresN());
 		if(auxA.size()>0) {	
-			ln_pc.print( "ENTRE IMAX y NORMALES",1);
+			//ln_pc.print( "ENTRE IMAX y NORMALES",1);
 			ln_pc.escogerAsientos(auxA);			
 		}
 	}
-	public void imprimirTicket() {
+	public void imprimirTicket() {		
 		Date date=new Date();
-		ln_pc.print("\nTICKET\n\t"+date+ "\nSALA: "+ln_pc.getTipo()+  "\nHorario: "+ln_pc.getSalaH() +
-		"\nPersona: "+ln_pc.getPersona().getDatos().getAtributoT1()+ "\nAsientos: \nIMAX:\n"+nombresI.toString()+"\nNORMALES\n"+
+		ln_pc.print("\nTICKET\n\t"+date+ "\nSALA: "+ln_pc.getTipo()+  "\nHorario: "+ln_pc.getSalaH() + "\nPelicula\t"+nombrePelicula+
+		"\nPersona: "+ln_pc.getPersona().getDatos().getAtributoT1()+ "\n\nAsientos: \n\nIMAX:\n"+nombresI.toString()+"\nNORMALES\n"+
 				nombresN.toString()+"\n",2);
 	}
 	public ArrayList<String> getNombresI() {

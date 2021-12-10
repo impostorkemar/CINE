@@ -21,6 +21,7 @@ public class panel_inicio extends JPanel {
 	public JLabel lbl_minutos;
 	private tiempo tiemp;
 	private JPanel panel_menu;
+	
 
 	/**
 	 * Create the panel.
