@@ -452,6 +452,14 @@ public class logica_negocio_panelCompra implements configurable {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+
+	public String getNombre_Pelicula_Funcion() {
+		return nombre_Pelicula_Funcion;
+	}
+
+	public void setNombre_Pelicula_Funcion(String nombre_Pelicula_Funcion) {
+		this.nombre_Pelicula_Funcion = nombre_Pelicula_Funcion;
+	}
 	
 	
 	

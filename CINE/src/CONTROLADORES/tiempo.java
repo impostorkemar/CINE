@@ -2,7 +2,7 @@ package CONTROLADORES;
 
 public class tiempo {
 	public tiempo()throws InterruptedException{
-		int horas=0; int minutos=0; int segundos = 2;
+		int horas=0; int minutos=0; int segundos = 1;
 		while(!(horas==0 && minutos==0 && segundos==0)) {
 			if(horas<10) {
 				System.out.print("0"+horas);
